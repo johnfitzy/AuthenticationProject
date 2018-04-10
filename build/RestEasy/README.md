@@ -8,7 +8,7 @@
 ## Example query:
 
 #### endpoint 
-- http://10.255.255.11:80/restEasy/api/v1/resource
+- http://10.255.255.11:80/webservice/api/v1/resource
 
 ### Headers:
 
