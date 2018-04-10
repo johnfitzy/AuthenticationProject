@@ -1,0 +1,7 @@
+---
+
+- hosts: app
+  become: yes
+  user: vagrant
+  roles:
+    - httpd

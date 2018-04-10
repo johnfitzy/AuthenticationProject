@@ -1,0 +1,4 @@
+gradfun ansible_connection=local
+
+[app]
+gradfun

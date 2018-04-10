@@ -1,0 +1,20 @@
+---
+
+# Wildfly
+wildfly_version: 11.0.0.Final
+wildfly_base_download_url: http://download.jboss.org/wildfly
+wildfly_name: wildfly-{{ wildfly_version }}
+wildfly_download_file: "{{ wildfly_name }}.tar.gz"
+wildfly_download_url: "{{ wildfly_base_download_url }}/{{ wildfly_version }}/\
+                       {{ wildfly_download_file }}"
+wildfly_download_dir: /tmp
+wildfly_install_dir: /opt
+wildfly_dir: "{{ wildfly_install_dir }}/{{ wildfly_name }}"
+wildfly_dir_mode: 0750
+wildfly_create_symlink: true
+
+# Wildfly as a service
+wildfly_service: wildfly
+wildfly_init_dir: /etc/init.d
+wildfly_conf_dir: /etc/wildfly
+wildfly_init_file: /opt/wildfly/docs/contrib/scripts/init.d/wildfly-init-redhat.sh

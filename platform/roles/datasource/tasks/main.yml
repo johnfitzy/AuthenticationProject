@@ -1,0 +1,32 @@
+---
+
+- name: Download Maria JDBC driver jar
+  get_url:
+    validate_certs: no
+    url: '{{ maria_db_download_url }}/{{ maria_db_version_jar }}'
+    dest: '{{ wildfly_deployments }}'
+    timeout: 120
+    mode: 0644
+
+- name: Wait until JDBC driver is deployed
+  wait_for:
+    path: '{{ wildfly_deployments }}/{{ maria_db_version_jar }}.deployed'
+    state: present
+
+- name: Create CLI batch script
+  copy:
+    dest: /opt/wildfly/standalone/configuration/cli
+    content: >
+     data-source add
+     --name={{ maria_db_ds_name }}
+     --jndi-name={{ maria_db_jndi_name }}
+     --driver-name={{ maria_db_version_jar }}
+     --connection-url={{ maria_db_con }}
+     --user-name={{ maria_db_user }}
+     --password={{ maria_db_password }}
+    owner: '{{ wildfly_user }}'
+    group: '{{ wildfly_group }}'
+    mode: 0640
+
+- name: Execute CLI batch config
+  command: "/opt/wildfly/bin/./jboss-cli.sh --connect controller='{{ wildfly_ip_address }}' --user='{{ wildfly_admin_user }}' --password='{{ wildfly_admin_password }}' --file=/opt/wildfly/standalone/configuration/cli"

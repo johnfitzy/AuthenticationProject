@@ -1,0 +1,38 @@
+---
+# This is still a work in progress
+- block:
+    - name: Create Httpd
+      group:
+        name: '{{ httpd_user }}'
+        state: present
+
+    - name: Create Httpd User
+      user:
+        name: '{{ httpd_user }}'
+        group: '{{ httpd_group }}'
+        createhome: no
+        system: yes
+        state: present
+        shell: /sbin/nologin
+        state: present
+
+- name: install the latest version of Apache
+  yum:
+    name: httpd
+    state: latest
+
+- name: Copy over http.conf.j2
+  template:
+    src: http.conf.j2
+    dest: '{{ apache_conf_file_dir }}'
+    owner: root
+    group: root
+    mode: 644
+
+- name: Enable and start httpd service
+  service:
+    name: '{{ apache_service }}'
+    daemon_reload: yes
+    enabled: yes
+    state: "{{ apache_state }}"
+

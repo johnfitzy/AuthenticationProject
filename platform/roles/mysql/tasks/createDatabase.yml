@@ -1,0 +1,8 @@
+---
+
+- name: Create a database called database
+  mysql_db:
+    name: database
+    state: present
+    login_user: root
+    login_password: '{{ mariadb_root_password }}'

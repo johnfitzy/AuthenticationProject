@@ -1,0 +1,55 @@
+{
+	"id": "82b71d3a-2253-6678-f84a-9727f18ac862",
+	"name": "rest easy api",
+	"description": "",
+	"order": [
+		"500c0e35-50e2-44c7-c1e2-792c53533e91"
+	],
+	"folders": [],
+	"folders_order": [],
+	"timestamp": 0,
+	"owner": "1929611",
+	"public": false,
+	"requests": [
+		{
+			"id": "500c0e35-50e2-44c7-c1e2-792c53533e91",
+			"headers": "//clientName: Test Applicaton\nx-client-secret: ;lCRblm~B]]\"c8\\;l<#[)k!L)J@T&@1<[G#S}\"^\"(e{eV|Ts|8Sl\\lhfHC#R\nx-client-id: 4yh4nd6qnpjku0vw5wuevwvuwfp6uj3k\n",
+			"headerData": [
+				{
+					"key": "clientName",
+					"value": "Test Applicaton",
+					"description": "",
+					"enabled": false
+				},
+				{
+					"key": "x-client-secret",
+					"value": ";lCRblm~B]]\"c8\\;l<#[)k!L)J@T&@1<[G#S}\"^\"(e{eV|Ts|8Sl\\lhfHC#R",
+					"description": "",
+					"enabled": true
+				},
+				{
+					"key": "x-client-id",
+					"value": "4yh4nd6qnpjku0vw5wuevwvuwfp6uj3k",
+					"description": "",
+					"enabled": true
+				}
+			],
+			"url": "http://10.255.255.11:80/restEasy/api/v1/resource",
+			"folder": null,
+			"queryParams": [],
+			"preRequestScript": null,
+			"pathVariables": {},
+			"pathVariableData": [],
+			"method": "GET",
+			"data": [],
+			"dataMode": "params",
+			"tests": null,
+			"currentHelper": "normal",
+			"helperAttributes": {},
+			"time": 1522811813242,
+			"name": "getMessage",
+			"description": null,
+			"collectionId": "82b71d3a-2253-6678-f84a-9727f18ac862"
+		}
+	]
+}

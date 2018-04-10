@@ -1,0 +1,4 @@
+---
+
+- name: Create 'Users' and clientApp table and set some defalut data
+  shell: mysql -u root -p'{{ mariadb_root_password }}' < /vagrant/roles/mysql/files/createdatabase.sql

@@ -1,0 +1,15 @@
+#
+#- hosts: app
+#  become: yes
+#  user: vagrant
+#  roles:
+#    - common
+#    - wildfly
+#    - datasource
+#    - httpd
+#    - mysql
+
+
+- include: app.yml
+- include: web.yml
+- include: db.yml

@@ -1,0 +1,15 @@
+---
+
+httpd_user: apache
+httpd_group: apache
+apache_service: httpd
+
+apache_restart_state: restarted
+apache_state: started
+
+apache_service: httpd
+apache_restart_state: restarted
+apache_conf_file_dir: /etc/httpd/conf/httpd.conf
+
+
+

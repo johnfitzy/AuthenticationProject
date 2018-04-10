@@ -1,0 +1,9 @@
+---
+
+- hosts: app
+  become: yes
+  user: vagrant
+  roles:
+    - common
+    - wildfly
+    - datasource

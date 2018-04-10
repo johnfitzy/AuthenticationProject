@@ -1,0 +1,61 @@
+# -*- mode: ruby -*-
+# vi: set ft=ruby :
+
+Vagrant.require_version ">= 2.0.0"
+
+required_plugins = %w(vagrant-cachier)
+
+plugins_to_install = required_plugins.select { |plugin| not Vagrant.has_plugin? plugin }
+if not plugins_to_install.empty?
+  puts "Installing plugins: #{plugins_to_install.join(' ')}"
+  if system "vagrant plugin install #{plugins_to_install.join(' ')}"
+    exec "vagrant #{ARGV.join(' ')}"
+  else
+    abort "Installation of one or more plugins has failed. Aborting."
+  end
+end
+
+Vagrant.configure("2") do |config|
+
+  config.vm.box = "centos7-ansible"
+  config.vm.box_url = "https://tools.siam.education.govt.nz/sources/centos7.box"
+  config.vm.box_check_update = false
+  config.vm.box_download_insecure = true
+
+  if Vagrant.has_plugin?("vagrant-cachier")
+    config.cache.scope = :box
+    config.cache.auto_detect = false
+    config.cache.enable :yum
+  end
+
+  # Only for JQ
+  if Vagrant.has_plugin?("vagrant-proxyconf")
+    config.proxy.http     = "http://jos-repo-server.datacom.co.nz:3128"
+    config.proxy.https    = "http://jos-repo-server.datacom.co.nz:3128"
+    config.proxy.no_proxy = "localhost,127.0.0.1"
+  end
+
+  config.vm.synced_folder ".", "/vagrant", :mount_options => ["ro"]
+
+  config.vm.define :gradfun, primary: true do |gradfun|
+    gradfun.vm.provider "virtualbox" do |vb|
+      vb.name = "gradfun-ansible"
+      vb.memory = 2048
+      vb.cpus = 2
+    end
+
+    gradfun.vm.hostname = "vagrant.grad.fun.dis.nz"
+    # to add more interfaces copy below and edit the configure-network.sh
+    gradfun.vm.network :private_network, ip: "10.255.255.2", netmask: "255.0.0.0", auto_config: false
+
+    gradfun.vm.provision "shell", path: "configure-network.sh"
+
+    gradfun.vm.provision "ansible_local", type: "ansible_local" do |ansible|
+      ansible.install            = true
+      ansible.compatibility_mode = "2.0"
+      ansible.install_mode       = "default"
+      ansible.playbook           = "site.yml"
+      ansible.inventory_path     = "inventories/staging/vagrant/inventory"
+    end
+  end
+end

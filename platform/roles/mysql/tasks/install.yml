@@ -1,0 +1,23 @@
+---
+
+- name: Install MariaDb
+  yum:
+    name: '{{ item }}'
+    state: present
+  with_items:
+    - mariadb
+    - mariadb-server
+
+
+# Install Python packages
+- name: Install the Python MySQL Support Libraries
+  yum:
+    pkg: MySQL-python
+    state: latest
+
+# Start MariaDb service
+- name: start mysql server and enable it on reboot
+  service:
+    name: mariadb
+    state: started
+    enabled: true

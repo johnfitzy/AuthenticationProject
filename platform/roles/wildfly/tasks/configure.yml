@@ -1,0 +1,48 @@
+---
+
+- name: Create Admin
+  command: "/opt/wildfly/bin/./add-user.sh -u '{{ wildfly_admin_user }}' -p {{ wildfly_admin_password }} -e"
+
+- name: Copy over my standalone conf
+  template:
+    src: standalone.xml.j2
+    dest: '{{ wildfly_dir }}/standalone/configuration/standalone.xml'
+    mode: 0644
+
+
+# Make wildfly a service
+- name: Create wildfly etc directory
+  file:
+    path: '{{ wildfly_conf_dir }}'
+    state: directory
+    owner: '{{ wildfly_user }}'
+    group: '{{ wildfly_group }}'
+    mode: '0750'
+
+- name: Copy wildfly configuration
+  template:
+    src: wildfly.conf
+    dest: '{{ wildfly_conf_dir }}/wildfly.conf'
+    owner: root
+    group: root
+    mode: '0640'
+
+- name: Create symlink to /etc/default/wildfly.conf
+  file:
+    state: link
+    src: '{{ wildfly_conf_dir }}/wildfly.conf'
+    dest: /etc/default/wildfly.conf
+
+# Change this to sim link
+- name: Copy init script
+  copy:
+    src: '{{ wildfly_init_file }}'
+    dest: /etc/init.d/wildfly
+    mode: 0744
+
+- name: Enable and start wildfly service
+  service:
+    name: '{{ wildfly_service }}'
+    daemon_reload: yes
+    enabled: yes
+    state: restarted
