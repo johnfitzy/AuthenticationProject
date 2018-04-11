@@ -34,7 +34,7 @@
 					"enabled": true
 				}
 			],
-			"url": "http://10.255.255.11:80/restEasy/api/v1/resource",
+			"url": "http://10.255.255.11:80/webservice/api/v1/resource",
 			"folder": null,
 			"queryParams": [],
 			"preRequestScript": null,

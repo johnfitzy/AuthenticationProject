@@ -8,7 +8,7 @@ The project 'api-admin' is a service to register you application with the api se
  
 The project 'webservice' is a basic webservice that requires the previously mentioned step to call. 
 
-See rest easy api.postman_collection.json for an example Postman request.
+See api.postman_collection.json for an example Postman request.
 
 ### Purpose / Goal
 
