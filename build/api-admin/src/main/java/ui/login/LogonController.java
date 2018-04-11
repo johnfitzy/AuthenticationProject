@@ -26,7 +26,6 @@ public class LogonController {
 
     public void login() {
 
-
         FacesContext facesContext = FacesContext.getCurrentInstance();
 
         if(userCredentialService.isUsernamePasswordMatch(userCredentialBean.getUsername(), userCredentialBean.getPassword())) {

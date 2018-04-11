@@ -41,7 +41,7 @@
     priv: '*.*:ALL'
     state: present
   with_items:
-    - vagrant.grad.fun.dis.nz
+    - '{{ mariadb_host }}'
     - 127.0.0.1
     - ::1
     - 10.0.0.1

@@ -1,0 +1,18 @@
+---
+
+- hosts: app
+  become: yes
+  roles:
+    - common
+    - wildfly
+    - datasource
+
+- hosts: web
+  become: yes
+  roles:
+    - httpd
+
+- hosts: dat
+  become: yes
+  roles:
+    - mysql

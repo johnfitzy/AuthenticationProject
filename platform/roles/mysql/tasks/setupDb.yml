@@ -1,4 +1,6 @@
 ---
 
 - name: Create 'Users' and clientApp table and set some defalut data
+#  debug:
+#    msg: fix later - this wont work on dcsg
   shell: mysql -u root -p'{{ mariadb_root_password }}' < /vagrant/roles/mysql/files/createdatabase.sql

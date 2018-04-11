@@ -1,7 +1,0 @@
----
-
-- hosts: app
-  become: yes
-  user: vagrant
-  roles:
-    - mysql

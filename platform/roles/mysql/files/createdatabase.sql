@@ -1,3 +1,4 @@
+
 CREATE TABLE `database`.`users` (
   `username` VARCHAR(62) NOT NULL,
   `fname` VARCHAR(45) NULL,
