@@ -1,9 +1,9 @@
 build_app:
   stage: build
   tags:
-    - mvn
+    - dot
   script:
-    - mvn -f build/api_admin/pom.xml package
+    - mvn -f build/api-admin/pom.xml package
   artifacts:
     expire_in: 1 day
     paths:
