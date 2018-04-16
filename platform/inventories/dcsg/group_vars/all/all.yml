@@ -14,4 +14,9 @@ httpd_ip_address: 10.0.0.3
 
 mariadb_host: 10.0.0.7
 
+# Fix this
+
+local_user: administrator
+local_group: administrator
+
 #ansible_ssh_private_key_file: key.pem

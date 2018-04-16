@@ -3,5 +3,4 @@
 - include: install.yml
 - include: config.yml
 - include: createDatabase.yml
-- include: setupDb.yml
 

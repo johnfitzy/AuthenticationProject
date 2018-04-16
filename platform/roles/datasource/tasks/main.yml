@@ -13,7 +13,7 @@
     path: '{{ wildfly_deployments }}/{{ maria_db_version_jar }}.deployed'
     state: present
 
-- name: Create CLI batch script
+- name: Create CLI datasource batch script
   copy:
     dest: /opt/wildfly/standalone/configuration/cli
     content: >
@@ -28,5 +28,5 @@
     group: '{{ wildfly_group }}'
     mode: 0640
 
-- name: Execute CLI batch config
+- name: Execute CLI datasource batch config
   command: "/opt/wildfly/bin/./jboss-cli.sh --connect controller='{{ wildfly_ip_address }}' --user='{{ wildfly_admin_user }}' --password='{{ wildfly_admin_password }}' --file=/opt/wildfly/standalone/configuration/cli"

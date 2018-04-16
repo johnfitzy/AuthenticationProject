@@ -6,3 +6,28 @@
     state: present
     login_user: root
     login_password: '{{ mariadb_root_password }}'
+
+
+- name: Create sql directory
+  file:
+    path: /tmp/sql
+    state: directory
+    owner: '{{ local_user }}'
+    group: '{{ local_group }}'
+
+
+- name: Copy sql file
+  copy:
+    src: /vagrant/roles/mysql/files/createdatabase.sql
+    dest: /tmp/sql/
+    owner: '{{ local_user }}'
+    group: '{{ local_group }}'
+
+
+- name: Create 'Users' and clientApp table and set some defalut data
+  shell: mysql -u root -p'{{ mariadb_root_password }}' < /tmp/sql/createdatabase.sql
+
+- name: Remove sql directory
+  file:
+    path: /tmp/sql
+    state: absent

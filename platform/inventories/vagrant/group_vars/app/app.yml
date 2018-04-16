@@ -13,3 +13,6 @@ mariadb_ip_address: 10.255.255.4
 httpd_ip_address: 10.255.255.11
 
 mariadb_host: vagrant.grad.fun.dis.nz
+
+local_user: vagrant
+local_group: vagrant
