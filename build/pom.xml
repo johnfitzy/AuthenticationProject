@@ -7,7 +7,11 @@
 	<groupId>com.auth.app</groupId>
     <artifactId>build</artifactId>
 	<version>1.0-SNAPSHOT</version>
-	<packaging>war</packaging>
+	<packaging>pom</packaging>
+
+	<name>My project - Build</name>
+
+
 
 	<dependencies>
 		<dependency>
