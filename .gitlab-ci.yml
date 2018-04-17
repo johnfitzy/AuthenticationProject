@@ -24,11 +24,20 @@ build_app:
 
 test_deploy:
   stage: deploy
-  tags:
-    - mvn
+  image: $CI_REGISTRY/255/255-ansible-vcd
+  variables:
+    ANSIBLE_OPTIONS: "feature_name=$CI_COMMIT_REF_SLUG fronting_host=web-john-web-vm webhost_dns=$CI_COMMIT_REF_SLUG.172.24.131.122.xip.io"
+    ANSIBLE_FORCE_COLOR: "true"
+  before_script:
+    - eval $(ssh-agent -s)
+    - echo "$SSH_PRIV_KEY" | tr -d '\r' | ssh-add - > /dev/null
+    - mkdir -p ~/.ssh
+    - chmod 700 ~/.ssh
   script:
     - echo "****** Will this work?? *****"
-    - ansible-playbook --key-file=$SSH_PRIV_KEY -i /vagrant/inventories/dcsg/inventory /platform/deploy_devlab.yml --user administrator --extra-vars "ansible_sudo_pass=$ANS_SUDO_PASSWORD"
+    - echo "$SSH_PRIV_KEY"
+#    - ansible-playbook --key-file=$SSH_PRIV_KEY -i /vagrant/inventories/dcsg/inventory /platform/deploy_devlab.yml --user administrator --extra-vars "ansible_sudo_pass=$ANS_SUDO_PASSWORD"
+
 
 
 #deploy_api_admin:

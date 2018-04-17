@@ -12,3 +12,11 @@ apache_conf_file_dir: /etc/httpd/conf/httpd.conf
 
 
 
+# TODO: move this out
+dns_domain: .172.24.131.122.xip.io
+
+certificates_path: "tls/"
+
+configure_selinux: no
+
+state_fe_be_entry: present
