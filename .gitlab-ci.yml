@@ -25,7 +25,7 @@ build_app:
 test_deploy:
   stage: deploy
   script:
-    - echo $SSH_PRIV_KEY
+    - echo $TEST_VAR
 
 
 
