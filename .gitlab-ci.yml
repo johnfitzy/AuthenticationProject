@@ -3,7 +3,7 @@ build_app:
   tags:
     - mvn
   script:
-    - 'mvn package'
+    - mvn -f build/pom.xml package
   artifacts:
     expire_in: 1 day
     paths:
