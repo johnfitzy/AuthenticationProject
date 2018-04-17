@@ -2,14 +2,12 @@ stages:
   - test
   - build
 
-
 run_unit_tests:
   stage: test
   tags:
     - mvn
   script:
     - mvn -f build/pom.xml test
-
 
 build_app:
   stage: build
@@ -22,3 +20,20 @@ build_app:
     paths:
       - build/api-admin/target/*.war
       - build/webservice/target/*.war
+
+test:
+  stage: build
+  script: echo $SSH_PRIV_KEY
+
+
+
+#deploy_api_admin:
+#  stage: deploy
+#  image: $CI_REGISTRY/255/255-ansible-vcd
+#
+#
+#  before_script:
+#      - eval $(ssh-agent -s)
+#      - echo "$SSH_PRIV_KEY" | tr -d '\r' | ssh-add - > /dev/null
+#      - mkdir -p ~/.ssh
+#      - chmod 700 ~/.ssh

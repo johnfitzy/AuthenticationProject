@@ -1,0 +1,11 @@
+---
+
+- hosts: app
+  become: yes
+  tasks:
+    - name: Test deploy api_admin war
+      copy:
+        src: ../build/api-admin/target/api-admin.war
+        dest: /opt/wildfly/standalone/deployments/
+        owner: wildfly
+        group: wildfly
