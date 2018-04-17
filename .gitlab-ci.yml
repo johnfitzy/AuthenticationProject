@@ -37,6 +37,7 @@ test_deploy:
     - echo "****** Will this work?? *****"
     - echo "$SSH_PRIV_KEY" | tr -d '\r'
     - whoami
+    - hostname
 #    - ansible-playbook --key-file=$SSH_PRIV_KEY -i /vagrant/inventories/dcsg/inventory /platform/deploy_devlab.yml --user administrator --extra-vars "ansible_sudo_pass=$ANS_SUDO_PASSWORD"
 
 
