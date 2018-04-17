@@ -7,4 +7,5 @@ build_app:
   artifacts:
     expire_in: 1 day
     paths:
-      - target/*.war
+      - build/api-admin/target/*.war
+      - build/webservice/target/*.war
