@@ -21,7 +21,7 @@ build_app:
       - build/api-admin/target/*.war
       - build/webservice/target/*.war
 
-test:
+test_deploy:
   stage: deploy
   script: echo $SSH_PRIV_KEY
 
