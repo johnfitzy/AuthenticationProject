@@ -6,5 +6,4 @@ build_app:
     - mvn -f build/pom.xml package
   artifacts:
     expire_in: 1 day
-    paths:
-      - build/target/*.war
+
