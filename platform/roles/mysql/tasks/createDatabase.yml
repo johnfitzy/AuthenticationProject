@@ -7,6 +7,11 @@
     login_user: root
     login_password: '{{ mariadb_root_password }}'
 
+#- name: Check if tables already exist
+#  shell:  mysql -u root -p'{{ mariadb_root_password }}' < "SELECT * FROM information_schema.tables WHERE table_schema = 'database' AND table_name = 'users' LIMIT 1"
+#    register: table_exists
+
+
 
 - name: Create sql directory
   file:
