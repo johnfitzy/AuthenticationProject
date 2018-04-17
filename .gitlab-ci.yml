@@ -7,4 +7,4 @@ build_app:
   artifacts:
     expire_in: 1 day
     paths:
-      - build/target/*.war
+      - target/*.war
