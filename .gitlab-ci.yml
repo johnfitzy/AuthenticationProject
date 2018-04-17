@@ -1,7 +1,7 @@
 build_app:
   stage: build
   tags:
-    - dot
+    - mvn
   script:
     - mvn -f build/pom.xml package
   artifacts:
