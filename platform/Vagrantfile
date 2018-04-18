@@ -35,7 +35,7 @@ Vagrant.configure("2") do |config|
     config.proxy.no_proxy = "localhost,127.0.0.1"
   end
 
-  config.vm.synced_folder ".", "/vagrant", :mount_options => ["ro"]
+  config.vm.synced_folder "../", "/vagrant", :mount_options => ["ro"]
 
   config.vm.define :gradfun, primary: true do |gradfun|
     gradfun.vm.provider "virtualbox" do |vb|
@@ -54,8 +54,8 @@ Vagrant.configure("2") do |config|
       ansible.install            = true
       ansible.compatibility_mode = "2.0"
       ansible.install_mode       = "default"
-      ansible.playbook           = "playbook.yml"
-      ansible.inventory_path     = "inventories/vagrant/inventory"
+      ansible.playbook           = "platform/playbook.yml"
+      ansible.inventory_path     = "platform/inventories/vagrant/inventory"
     end
   end
 end

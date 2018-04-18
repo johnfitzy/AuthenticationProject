@@ -21,3 +21,4 @@ VALUES('ray@gmail.com','Ray','Jones','$2a$10$zo8ziav/LLmibB7gPLsVA.aid/hPjFn9FUK
 
 INSERT INTO `database`.`clientApp` (`client_id`, `app_name`, `client_secret`)
 VALUES('4yh4nd6qnpjku0vw5wuevwvuwfp6uj3k','Test Application','$2a$10$cgApHE1XoRkEbgkxGrdxmePh5CRDw5hsM1F4psQAbDU0qexwua2DC');
+

@@ -7,6 +7,10 @@
     - wildfly
     - datasource
     - flyway
-    - httpd
     - mysql
+    - migrations
+    - httpd
+
+
+
 

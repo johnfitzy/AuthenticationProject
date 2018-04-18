@@ -6,6 +6,8 @@ wildfly_group: wildfly
 wildfly_admin_user: '{{ wildfly_secret_admin_user }}'
 wildfly_admin_password: '{{ wildfly_secret_admin_password }}'
 
+mariadb_root_password: password
+
 
 # Vagrant IP addresses
 wildfly_ip_address: 10.255.255.2

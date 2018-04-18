@@ -1,0 +1,17 @@
+---
+
+- name: Create a database called database
+  mysql_db:
+    name: database
+    state: present
+    login_user: root
+    login_password: '{{ mariadb_root_password }}'
+
+
+- name: Sql migrations
+  unarchive:
+    src: /vagrant/build/database/target/authentication-app-sql-full.tar.gz
+    dest: /tmp/
+
+- name: Db Migratied
+  command: /opt/flyway -url=jdbc:mysql://10.255.255.4:3306/database -user=root -password=password -locations=filesystem:/tmp/mysql/database/migration/ migrate
