@@ -5,13 +5,3 @@ mariadb_config_network: /etc/my.cnf.d/network.cnf
 
 
 
-#Move this out
-dns_domain: .172.24.131.122.xip.io
-
-certificates_path: "tls/"
-
-configure_selinux: no
-
-
-
-

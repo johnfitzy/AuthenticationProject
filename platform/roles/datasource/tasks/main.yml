@@ -23,7 +23,7 @@
      --driver-name={{ maria_db_version_jar }}
      --connection-url={{ maria_db_con }}
      --user-name={{ maria_db_user }}
-     --password={{ maria_db_password }}
+     --password={{ mariadb_root_password }}
     owner: '{{ wildfly_user }}'
     group: '{{ wildfly_group }}'
     mode: 0640

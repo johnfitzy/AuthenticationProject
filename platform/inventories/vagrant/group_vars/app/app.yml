@@ -6,13 +6,16 @@ wildfly_group: wildfly
 wildfly_admin_user: '{{ wildfly_secret_admin_user }}'
 wildfly_admin_password: '{{ wildfly_secret_admin_password }}'
 
+mariadb_db_name: database
 mariadb_root_password: password
-
+maria_db_user: root
 
 # Vagrant IP addresses
 wildfly_ip_address: 10.255.255.2
 mariadb_ip_address: 10.255.255.4
 httpd_ip_address: 10.255.255.11
+
+path_to_sql: /vagrant/build/database/target/
 
 mariadb_host: vagrant.grad.fun.dis.nz
 
