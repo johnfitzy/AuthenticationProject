@@ -22,6 +22,3 @@ sudo nmcli con add type ethernet ifname enp0s8 con-name enp0s8
 sudo nmcli con mod enp0s8 ipv4.addresses '10.255.255.2,10.255.255.3,10.255.255.4,10.255.255.11' ipv4.method manual ipv4.routes 10.0.0.0/16
 sudo systemctl restart network
 
-
-#flyway -url=jdbc:mysql://10.255.255.4:3306/database -user=root -password=password -locations=filesystem:/tmp/mysql/database/migration/ migrate
-
