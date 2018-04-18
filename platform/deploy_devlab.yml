@@ -1,6 +1,6 @@
 ---
-
-- hosts: app
+- name: Deploy app
+  hosts: app
   become: yes
   tasks:
     - name: Test deploy api_admin war
