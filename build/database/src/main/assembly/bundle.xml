@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<assembly>
+    <id>full</id>
+    <formats>
+        <format>tar.gz</format>
+    </formats>
+    <includeBaseDirectory>false</includeBaseDirectory>
+    <fileSets>
+        <fileSet>
+            <directory>/src/main/resources/db</directory>
+            <outputDirectory>mysql/database</outputDirectory>
+        </fileSet>
+    </fileSets>
+</assembly>
+
+
+

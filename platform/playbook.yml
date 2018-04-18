@@ -6,6 +6,7 @@
     - common
     - wildfly
     - datasource
+    - flyway
     - httpd
     - mysql
 

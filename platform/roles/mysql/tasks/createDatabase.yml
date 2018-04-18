@@ -12,7 +12,6 @@
 #    register: table_exists
 
 
-
 - name: Create sql directory
   file:
     path: /tmp/sql
@@ -28,11 +27,11 @@
     owner: '{{ local_user }}'
     group: '{{ local_group }}'
 
-
-- name: Create 'Users' and clientApp table and set some defalut data
-  shell: mysql -u root -p'{{ mariadb_root_password }}' < /tmp/sql/createdatabase.sql
-
-- name: Remove sql directory
-  file:
-    path: /tmp/sql
-    state: absent
+#
+#- name: Create 'Users' and clientApp table and set some defalut data
+#  shell: mysql -u root -p'{{ mariadb_root_password }}' < /tmp/sql/createdatabase.sql
+#
+#- name: Remove sql directory
+#  file:
+#    path: /tmp/sql
+#    state: absent

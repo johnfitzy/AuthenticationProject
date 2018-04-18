@@ -49,10 +49,9 @@
             <version>0.4</version>
         </dependency>
     </dependencies>
-
-
     <modules>
         <module>api-admin</module>
         <module>webservice</module>
+        <module>database</module>
     </modules>
 </project>

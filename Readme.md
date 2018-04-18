@@ -31,6 +31,7 @@ The end goal is to implement OAuth.
 - Authentication: implement the SSL part of 'basic auth'
 - Move toward OAuth
 - Make Vagrant environment build-able from anywhere
+- Fix up the database, for example I'm not sure if having one db is right, refactor the database module
 
 
 ### Technologies / dependencies 

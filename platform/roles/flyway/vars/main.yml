@@ -1,0 +1,9 @@
+
+flyway_version: 5.0.7
+flyway_install_root: /opt/
+
+flyway_url: "https://repo1.maven.org/maven2/org/flywaydb/flyway-commandline/{{ flyway_version }}/flyway-commandline-{{ flyway_version }}-linux-x64.tar.gz"
+flyway_core_jar: "{{ flyway_install_root }}/flyway-{{ flyway_version}}/lib/flyway-core-{{ flyway_version }}.jar"
+flyway_script : "{{ flyway_install_root }}/flyway-{{ flyway_version}}/flyway"
+flyway_symblink: "/opt/flyway"
+flyway_config_file: "{{ flyway_install_root }}/flyway-{{ flyway_version}}/conf/flyway.conf"
