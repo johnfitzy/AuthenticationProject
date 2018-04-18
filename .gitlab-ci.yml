@@ -35,9 +35,14 @@ test_deploy:
     - chmod 700 ~/.ssh
   script:
     - echo "****** Will this work?? *****"
-    - echo "$SSH_PRIV_KEY" | tr -d '\r'
-    - whoami
-    - hostname
+
+    - |
+
+       ansible-playbook -i platform/inventories/dcsg/inventory \
+           --extra-vars "$ANSIBLE_OPTIONS ansible_sudo_pass=$APP_SUDO_PASSWORD" \
+           --user administrator \
+           platform/deploy_devlab.yml
+
 #    - ansible-playbook --key-file=$SSH_PRIV_KEY -i /vagrant/inventories/dcsg/inventory /platform/deploy_devlab.yml --user administrator --extra-vars "ansible_sudo_pass=$ANS_SUDO_PASSWORD"
 
 
