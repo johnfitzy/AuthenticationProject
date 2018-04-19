@@ -1,7 +1,6 @@
 stages:
   - test
   - build
-  - deploy
 
 run_unit_tests:
   stage: test
