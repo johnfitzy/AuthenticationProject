@@ -39,7 +39,6 @@
             </plugin>
         </plugins>
 
-        <pluginManagement>
             <plugins>
                 <plugin>
                     <groupId>org.flywaydb</groupId>
@@ -60,6 +59,5 @@
                     </executions>
                 </plugin>
             </plugins>
-        </pluginManagement>
     </build>
 </project>
