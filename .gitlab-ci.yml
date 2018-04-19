@@ -38,7 +38,7 @@ test_deploy:
     - echo "****** Will this work?? *****"
 
 
-    ansible-playbook --key-file=$SSH_PRIV_KEY -i /platform/inventories/dcsg/inventory --extra-vars "ansible_sudo_pass=$APP_SUDO_PASSWORD" --user administrator /platform/deploy_devlab.yml
+    - ansible-playbook --key-file=$SSH_PRIV_KEY -i /platform/inventories/dcsg/inventory --extra-vars "ansible_sudo_pass=$APP_SUDO_PASSWORD" --user administrator /platform/deploy_devlab.yml
 #
 #    - |
 #
