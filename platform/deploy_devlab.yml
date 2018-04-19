@@ -1,14 +1,22 @@
 ---
-- name: Deploy app
-  hosts: app
-  become: yes
-  tasks:
-    - name: Test deploy api_admin war
-      copy:
-        src: build/api-admin/target/api-admin.war
-        dest: /opt/wildfly/standalone/deployments/
-        owner: wildfly
-        group: wildfly
+#- name: Deploy app
+#  hosts: app
+#  become: yes
+#  tasks:
+#    - name: Test deploy api_admin war
+#      copy:
+#        src: build/api-admin/target/api-admin.war
+#        dest: /opt/wildfly/standalone/deployments/
+#        owner: wildfly
+#        group: wildfly
+
+
+hosts: app
+become: yes
+tasks:
+  - name: test test test
+    debug:
+      msg: why the fuck won't this connect!!!!!!!!!!
 
 
 #C:\Users\johnf\IdeaProjects\2018-April\AuthenticationProject\build\api-admin\target\api-admin.war
