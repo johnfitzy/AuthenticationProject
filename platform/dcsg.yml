@@ -16,3 +16,4 @@
   become: yes
   roles:
     - mysql
+    - flyway
