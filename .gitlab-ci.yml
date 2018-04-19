@@ -36,6 +36,9 @@ test_deploy:
     - chmod 700 ~/.ssh
   script:
     - echo "****** Will this work?? *****"
+
+
+    ansible-playbook --key-file=$SSH_PRIV_KEY -i /platform/inventories/dcsg/inventory --extra-vars "ansible_sudo_pass=$APP_SUDO_PASSWORD" --user administrator /platform/deploy_devlab.yml
 #
 #    - |
 #
@@ -44,7 +47,7 @@ test_deploy:
 #           --user administrator \
 #           platform/deploy_devlab.yml
 
-  allow_failure: false
-  environment:
-    name: $CI_COMMIT_REF_SLUG
+#  allow_failure: false
+#  environment:
+#    name: $CI_COMMIT_REF_SLUG
 
