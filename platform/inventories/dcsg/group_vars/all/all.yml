@@ -7,12 +7,18 @@ wildfly_admin_user: '{{ wildfly_secret_admin_user }}'
 wildfly_admin_password: '{{ wildfly_secret_admin_password }}'
 
 
-# Vagrant IP addresses
-wildfly_ip_address: 10.0.0.6
-mariadb_ip_address: 10.0.0.7
-httpd_ip_address: 10.0.0.3
+mariadb_db_name: database
+mariadb_root_password: password
+maria_db_user: root
 
+
+mariadb_ip_address: 10.0.0.7
+wildfly_ip_address: 10.0.0.6
+httpd_ip_address: 10.0.0.3
+#WTF?
 mariadb_host: 10.0.0.7
+
+path_to_sql: build/database/target/
 
 # Fix this
 
@@ -20,10 +26,3 @@ local_user: administrator
 local_group: administrator
 
 #ansible_ssh_private_key_file: key.pem
-
-
-dns_domain: .172.24.131.122.xip.io
-
-certificates_path: "tls/"
-
-configure_selinux: no

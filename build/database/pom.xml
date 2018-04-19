@@ -17,7 +17,6 @@
 
     <build>
         <finalName>authentication-app-sql</finalName>
-
         <plugins>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
@@ -56,6 +55,5 @@
                 </executions>
             </plugin>
         </plugins>
-
     </build>
 </project>
