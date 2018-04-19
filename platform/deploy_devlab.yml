@@ -17,7 +17,7 @@
   tasks:
     - name: test test test
       file:
-        path: /home/administrator/goatfucker
+        path: /home/administrator/fuckoff
         state: directory
 
 
