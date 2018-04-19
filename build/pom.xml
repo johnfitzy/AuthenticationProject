@@ -11,6 +11,12 @@
 
     <name>My project - Build</name>
 
+    <modules>
+        <module>api-admin</module>
+        <module>webservice</module>
+        <module>database</module>
+    </modules>
+
     <dependencies>
         <dependency>
             <groupId>org.jboss.weld</groupId>
@@ -49,9 +55,5 @@
             <version>0.4</version>
         </dependency>
     </dependencies>
-    <modules>
-        <module>api-admin</module>
-        <module>webservice</module>
-        <module>database</module>
-    </modules>
+
 </project>
