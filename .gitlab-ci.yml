@@ -35,10 +35,14 @@ test_deploy:
     - mkdir -p ~/.ssh
     - chmod 700 ~/.ssh
   script:
-    - echo "****** Will this work?? *****"
+    - echo "****** This is pissing me off *****"
+    - echo $SSH_PRIV_KEY
+    - echo $APP_SUDO_PASSWORD
+    - ansible-playbook --key-file=$SSH_PRIV_KEY -i platform/inventories/dcsg/inventory --extra-vars "ansible_sudo_pass=$APP_SUDO_PASSWORD" --user administrator platform/deploy_devlab.yml
 
 
-    - ansible-playbook --key-file=$SSH_PRIV_KEY -i /platform/inventories/dcsg/inventory /platform/deploy_devlab.yml --extra-vars "ansible_sudo_pass=$APP_SUDO_PASSWORD" --user administrator
+#    - ansible-playbook --key-file=$SSH_PRIV_KEY -i /platform/inventories/dcsg/inventory --extra-vars "ansible_sudo_pass=$APP_SUDO_PASSWORD" --user administrator /platform/deploy_devlab.yml
+#
 #    - |
 #
 #       ansible-playbook -i platform/inventories/dcsg/inventory \
