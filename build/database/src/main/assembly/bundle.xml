@@ -7,11 +7,10 @@
     <includeBaseDirectory>false</includeBaseDirectory>
     <fileSets>
         <fileSet>
-            <directory>/src/main/resources/db/</directory>
-            <outputDirectory>mysql/database</outputDirectory>
+            <directory>/build/database/src\main/resources/db/</directory>
+            <outputDirectory>mysql/database/</outputDirectory>
         </fileSet>
     </fileSets>
 </assembly>
-
 
 
