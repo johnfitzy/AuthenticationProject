@@ -27,7 +27,7 @@ test_deploy:
   stage: deploy
   image: $CI_REGISTRY/255/255-ansible-vcd
   variables:
-    ANSIBLE_OPTIONS: "feature_name=$CI_COMMIT_REF_SLUG fronting_host=web-john-web-vm"
+    ANSIBLE_OPTIONS: "feature_name=$CI_COMMIT_REF_SLUG fronting_host=web-demo-$CI_COMMIT_REF_SLUG webhost_dns=$CI_COMMIT_REF_SLUG.172.24.131.122.xip.io state_fe_be_entry=absent"
     ANSIBLE_FORCE_COLOR: "true"
   before_script:
     - eval $(ssh-agent -s)
@@ -36,9 +36,12 @@ test_deploy:
     - chmod 700 ~/.ssh
   script:
     - echo "****** This is pissing me off *****"
+    - echo
     - echo $SSH_PRIV_KEY
     - echo $APP_SUDO_PASSWORD
     - ansible-playbook -i platform/inventories/dcsg/inventory --extra-vars "$ANSIBLE_OPTIONS ansible_sudo_pass=$APP_SUDO_PASSWORD" --user administrator platform/deploy_devlab.yml
+
+#      ansible-playbook -i ansible/staging/devlab/inventory/ \ --extra-vars "$ANSIBLE_OPTIONS ansible_sudo_pass=$APP_SUDO_PASSWORD" \ --user ansibleuser \ ansible/app.yml
 
 
 #ansible-playbook -i ansible/staging/devlab/inventory/ --extra-vars "$ANSIBLE_OPTIONS ansible_sudo_pass=$PROXY_SUDO_PASSWORD" --user administrator \ ansible/proxy.yml
