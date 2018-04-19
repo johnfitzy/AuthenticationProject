@@ -21,29 +21,30 @@ build_app:
     paths:
       - build/api-admin/target/*.war
       - build/webservice/target/*.war
+      - build/database/target/*.gz
 
-test_deploy:
-  stage: deploy
-  image: $CI_REGISTRY/255/255-ansible-vcd
-  variables:
-    ANSIBLE_OPTIONS: "feature_name=$CI_COMMIT_REF_SLUG fronting_host=web-john-web-vm"
-    ANSIBLE_FORCE_COLOR: "true"
-  before_script:
-    - eval $(ssh-agent -s)
-    - echo "$SSH_PRIV_KEY" | tr -d '\r' | ssh-add - > /dev/null
-    - mkdir -p ~/.ssh
-    - chmod 700 ~/.ssh
-  script:
-    - echo "****** Will this work?? *****"
-
-    - |
-
-       ansible-playbook -i platform/inventories/dcsg/inventory \
-           --extra-vars "$ANSIBLE_OPTIONS ansible_sudo_pass=$APP_SUDO_PASSWORD" \
-           --user administrator \
-           platform/deploy_devlab.yml
-
-  allow_failure: false
-  environment:
-    name: $CI_COMMIT_REF_SLUG
+#test_deploy:
+#  stage: deploy
+#  image: $CI_REGISTRY/255/255-ansible-vcd
+#  variables:
+#    ANSIBLE_OPTIONS: "feature_name=$CI_COMMIT_REF_SLUG fronting_host=web-john-web-vm"
+#    ANSIBLE_FORCE_COLOR: "true"
+#  before_script:
+#    - eval $(ssh-agent -s)
+#    - echo "$SSH_PRIV_KEY" | tr -d '\r' | ssh-add - > /dev/null
+#    - mkdir -p ~/.ssh
+#    - chmod 700 ~/.ssh
+#  script:
+#    - echo "****** Will this work?? *****"
+#
+#    - |
+#
+#       ansible-playbook -i platform/inventories/dcsg/inventory \
+#           --extra-vars "$ANSIBLE_OPTIONS ansible_sudo_pass=$APP_SUDO_PASSWORD" \
+#           --user administrator \
+#           platform/deploy_devlab.yml
+#
+#  allow_failure: false
+#  environment:
+#    name: $CI_COMMIT_REF_SLUG
 
