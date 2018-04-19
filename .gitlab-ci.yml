@@ -20,7 +20,7 @@ build_app:
     paths:
       - build/api-admin/target/*.war
       - build/webservice/target/*.war
-      - build/database/target/authentication-app-sql-full.tar.gz
+    #   - build/database/target/authentication-app-sql-full.tar.gz
 #test_deploy:
 #  stage: deploy
 #  image: $CI_REGISTRY/255/255-ansible-vcd
