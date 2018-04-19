@@ -40,6 +40,12 @@ test_deploy:
     - echo $SSH_PRIV_KEY
     - echo $APP_SUDO_PASSWORD
     - ansible-playbook -i platform/inventories/dcsg/inventory --extra-vars "$ANSIBLE_OPTIONS ansible_sudo_pass=$APP_SUDO_PASSWORD" --user administrator platform/deploy_devlab.yml
+  environment:
+    name: $CI_COMMIT_REF_SLUG
+    action: stop
+  only:
+    - branches
+  when: manual
 
 #      ansible-playbook -i ansible/staging/devlab/inventory/ \ --extra-vars "$ANSIBLE_OPTIONS ansible_sudo_pass=$APP_SUDO_PASSWORD" \ --user ansibleuser \ ansible/app.yml
 
