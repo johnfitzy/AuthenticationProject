@@ -21,7 +21,7 @@ build_app:
     paths:
       - build/api-admin/target/*.war
       - build/webservice/target/*.war
-      - build/database/target/*.gz
+      - build/database/target/*.tar.gz
 
 #test_deploy:
 #  stage: deploy
