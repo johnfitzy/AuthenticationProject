@@ -7,7 +7,7 @@
     <includeBaseDirectory>false</includeBaseDirectory>
     <fileSets>
         <fileSet>
-            <directory>/build/database/src/main/resources/db/</directory>
+            <directory>/src/main/resources/db/</directory>
             <outputDirectory>mysql/database/</outputDirectory>
         </fileSet>
     </fileSets>
