@@ -14,13 +14,13 @@ build_app:
   tags:
     - mvn
   script:
-    - mvn -f build/pom.xml package
+    - mvn -f build/pom.xml package -X
   artifacts:
     expire_in: 1 day
     paths:
       - build/api-admin/target/*.war
       - build/webservice/target/*.war
-    #   - build/database/target/authentication-app-sql-full.tar.gz
+      - build/database/target/*.tar.gz
 #test_deploy:
 #  stage: deploy
 #  image: $CI_REGISTRY/255/255-ansible-vcd
