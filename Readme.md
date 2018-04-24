@@ -28,9 +28,8 @@ The end goal is to implement OAuth.
 ### TODO
 
 - Ansible: make the environment come up on GCSC or AWS
-- Authentication: implement the SSL part of 'basic auth'
+- Properly store client cert CN in db (next thing to do)
 - Move toward OAuth
-- Make Vagrant environment build-able from anywhere
 - Fix up the database, for example I'm not sure if having one db is right, refactor the database module
 
 
@@ -44,3 +43,5 @@ The end goal is to implement OAuth.
 - Apache
 - Ansible
 - Virtual Box
+- Flyway
+- Mutual SSl
