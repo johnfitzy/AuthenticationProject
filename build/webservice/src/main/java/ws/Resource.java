@@ -1,7 +1,7 @@
 package ws;
 
 
-import ws.annotations.MessageFilterMapper;
+import ws.annotations.ClientAuthMapper;
 import javax.enterprise.context.ApplicationScoped;
 import javax.ws.rs.GET;
 import javax.ws.rs.Path;
@@ -15,9 +15,16 @@ public class Resource {
 
     @GET
     @Path("/resource")
-    @MessageFilterMapper
+    @ClientAuthMapper
     public Response printMessage() {
         return Response.status(200).entity("RESOURCE!!!!!").build();
+    }
+
+
+    @GET
+    @Path("/test")
+    public Response test() {
+        return Response.status(200).entity("No filter").build();
     }
 
 }
