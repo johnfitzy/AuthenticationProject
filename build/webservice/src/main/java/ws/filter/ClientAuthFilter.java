@@ -1,6 +1,6 @@
 package ws.filter;
 
-import ws.annotations.MessageFilterMapper;
+import ws.annotations.ClientAuthMapper;
 import ws.error.ClientNotFoundException;
 import java.io.IOException;
 import javax.annotation.Priority;
@@ -14,14 +14,15 @@ import ws.service.KeyService;
 
 @Provider
 @Priority(value = 1)
-@MessageFilterMapper
-public class MessageFilter implements ContainerRequestFilter {
+@ClientAuthMapper
+public class ClientAuthFilter implements ContainerRequestFilter {
 
     @Inject
     KeyService keyService;
 
     private final static String X_CLIENT_SECRET = "x-client-secret";
     private final static String X_CLIENT_ID = "x-client-id";
+    private final static String SSL_CLIENT_CN = "ssl_client_cn";
     private final static int FIRST_ELEMENT = 0;
 
 
@@ -39,15 +40,27 @@ public class MessageFilter implements ContainerRequestFilter {
 
             final String clientId = headers.get(X_CLIENT_ID).get(FIRST_ELEMENT);
             final String clientSecret = headers.get(X_CLIENT_SECRET).get(FIRST_ELEMENT);
+            final String clientCommonName = headers.get(SSL_CLIENT_CN).get(FIRST_ELEMENT);
+
+            if(!isClientAuthorizedForWebservice(clientCommonName)) {
+                containerRequestContext.abortWith(Response.status(Response.Status.UNAUTHORIZED).entity("Client certificate is not registered with this service").build());
+                return;
+            }
 
             if (!isApiKeyMatch(clientId, clientSecret)) {
-                containerRequestContext.abortWith(Response.status(Response.Status.UNAUTHORIZED).entity("You don't have authorisation to use this webservice").build());
+                containerRequestContext.abortWith(Response.status(Response.Status.UNAUTHORIZED).entity("Authentication failed").build());
+                return;
             }
 
         } catch (ClientNotFoundException e) {
             containerRequestContext.abortWith(Response.status(Response.Status.INTERNAL_SERVER_ERROR).entity(e.getMessage()).build());
             e.printStackTrace();
         }
+    }
+
+    //TODO: fix up once database is changed
+    private boolean isClientAuthorizedForWebservice(final String clientCommonName) {
+        return "my.client.com".equals(clientCommonName);
     }
 
     private boolean isApiKeyMatch(final String clientId, final String clientSecret) throws ClientNotFoundException {
