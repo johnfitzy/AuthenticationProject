@@ -8,15 +8,10 @@ apache_restart_state: restarted
 apache_state: started
 
 apache_restart_state: restarted
-apache_conf_file_dir: /etc/httpd/conf/httpd.conf
+apache_conf_dest: /etc/httpd/conf/httpd.conf
+apache_ssl_conf_dest: /etc/httpd/conf.d/ssl.conf
 
 
-
-# TODO: move this out
-dns_domain: .172.24.131.122.xip.io
-
-certificates_path: "tls/"
-
-configure_selinux: no
-
-state_fe_be_entry: present
+httpd_packages:
+  - httpd
+  - mod_ssl

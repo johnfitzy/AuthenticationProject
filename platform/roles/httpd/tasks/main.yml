@@ -16,15 +16,24 @@
         shell: /sbin/nologin
         state: present
 
-- name: install the latest version of Apache
-  yum:
-    name: httpd
+- name: Ensure Apache and mod_ssl are installed
+  package:
+    name: '{{ item }}'
     state: latest
+  with_items: '{{ httpd_packages }}'
 
 - name: Copy over http.conf.j2
   template:
     src: http.conf.j2
-    dest: '{{ apache_conf_file_dir }}'
+    dest: '{{ apache_conf_dest }}'
+    owner: root
+    group: root
+    mode: 644
+
+- name: Copy over ssl.conf.j2
+  template:
+    src: ssl.conf.j2
+    dest: '{{ apache_ssl_conf_dest }}'
     owner: root
     group: root
     mode: 644
