@@ -34,7 +34,7 @@ public class ApplicationController {
     //TODO: rename some of these methods
     private void createAndStoreAppCredentials() {
 
-        final ApplicationCredentials applicationCredentials = applicationService.registerApplication(applicationBean.getApplicationName());
+        final ApplicationCredentials applicationCredentials = applicationService.registerApplication();
 
         if (applicationCredentials != null) {
 

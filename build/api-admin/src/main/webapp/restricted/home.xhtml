@@ -21,12 +21,10 @@
 
     <div class="container">
         <h:graphicImage library="logo" name="logo.png"/>
-        <h1>Register your application</h1>
+        <h1>Register an application</h1>
 
         <br></br>
         <br></br>
-
-        <h3>Enter you application name to receive a client id and api key</h3>
 
         <br></br>
 
@@ -36,8 +34,14 @@
                 <p:autoUpdate />
             </p:messages>
 
+            <h:outputLabel for="appName" value="Enter the application name"/>
             <div class="form-group">
                 <h:inputText class="form-control" id="clientName" value="#{applicationBean.applicationName}"/>
+            </div>
+
+            <h:outputLabel for="appName" value="Enter the application common name from their certificate"/>
+            <div class="form-group">
+                <h:inputText class="form-control" id="commonName" value="#{applicationBean.commonName}"/>
             </div>
 
             <h:commandButton class="btn btn-primary" value="Create" action="#{applicationController.create}" update="growl">

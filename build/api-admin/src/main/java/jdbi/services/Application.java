@@ -4,6 +4,7 @@ import jdbi.JDBIProducer;
 import javax.enterprise.context.RequestScoped;
 import javax.inject.Inject;
 import javax.inject.Named;
+import ui.register.ApplicationBean;
 
 @Named
 @RequestScoped
@@ -37,11 +38,12 @@ public class Application {
         return currentApp == null;
     }
 
-    public int persistApplication(final String appName, final String clientSecretHash, final String clientId) {
+    public int persistApplication(final ApplicationBean applicationBean, final String clientSecretHash, final String clientId) {
+
         return jdbiProducer.getJdbi()
                 .withHandle(handle ->
                         handle.execute("INSERT INTO clientApp(client_id, app_name, client_secret) VALUES(?, ?, ?)",
-                                clientId, appName, clientSecretHash));
+                                clientId, applicationBean.getApplicationName(), clientSecretHash));
 
     }
 }

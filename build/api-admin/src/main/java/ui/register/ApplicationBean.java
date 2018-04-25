@@ -14,6 +14,7 @@ public class ApplicationBean implements Serializable {
     private String applicationName;
     private String clientId;
     private String clientSecret;
+    private String commonName;
     private boolean isShowResult;
 
     public boolean isShowResult() {
@@ -46,5 +47,13 @@ public class ApplicationBean implements Serializable {
 
     public void setClientSecret(final String clientSecret) {
         this.clientSecret = clientSecret;
+    }
+
+    public String getCommonName() {
+        return commonName;
+    }
+
+    public void setCommonName(final String commonName) {
+        this.commonName = commonName;
     }
 }

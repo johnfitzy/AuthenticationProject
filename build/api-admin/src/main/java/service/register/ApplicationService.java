@@ -7,6 +7,7 @@ import javax.enterprise.context.RequestScoped;
 import javax.inject.Inject;
 import javax.inject.Named;
 import org.mindrot.jbcrypt.BCrypt;
+import ui.register.ApplicationBean;
 import ui.register.ApplicationCredentials;
 
 
@@ -23,15 +24,19 @@ public class ApplicationService {
     @Inject
     Application applicationDao;
 
-    public ApplicationCredentials registerApplication(final String appName) {
+    @Inject
+    ApplicationBean applicationBean;
+
+    public ApplicationCredentials registerApplication() {
 
         final String clientSecret = randomCredentialGenerator.generateRandomPassword();
         final String clientSecretHash = BCrypt.hashpw(clientSecret, BCrypt.gensalt());
         final String clientId = randomCredentialGenerator.generateRandomClientId();
 
-        if(applicationDao.persistApplication(appName, clientSecretHash, clientId) > 0){
+
+        if(applicationDao.persistApplication(applicationBean, clientSecretHash, clientId) > 0){
             return new ApplicationCredentials(new String(Base64.getEncoder().encode(clientId.getBytes())),
-                    appName, new String(Base64.getEncoder().encode(clientSecret.getBytes())));
+                    applicationBean.getApplicationName(), new String(Base64.getEncoder().encode(clientSecret.getBytes())));
         }
 
         return null;
