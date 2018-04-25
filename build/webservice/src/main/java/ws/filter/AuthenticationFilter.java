@@ -15,7 +15,7 @@ import ws.service.KeyService;
 @Provider
 @Priority(value = 1)
 @ClientAuthMapper
-public class ClientAuthFilter implements ContainerRequestFilter {
+public class AuthenticationFilter implements ContainerRequestFilter {
 
     @Inject
     KeyService keyService;

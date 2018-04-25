@@ -9,22 +9,29 @@ import javax.ws.rs.core.Response;
 
 
 @ApplicationScoped
-@Path("/v1")
+@Path("/v1/resource/")
 public class Resource {
 
 
     @GET
-    @Path("/resource")
+    @Path("/one")
     @ClientAuthMapper
-    public Response printMessage() {
-        return Response.status(200).entity("RESOURCE!!!!!").build();
+    public Response resourceOne() {
+        return Response.status(200).entity("Resource one").build();
+    }
+
+    @GET
+    @Path("/two")
+    public Response resourceTwo() {
+        return Response.status(200).entity("Resource two").build();
     }
 
 
+
     @GET
-    @Path("/test")
-    public Response test() {
-        return Response.status(200).entity("No filter").build();
+    @Path("/open")
+    public Response open() {
+        return Response.status(200).entity("Open resource").build();
     }
 
 }
