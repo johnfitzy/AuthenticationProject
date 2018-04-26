@@ -97,7 +97,7 @@ SSLCipherSuite HIGH:MEDIUM:!aNULL:!MD5:!SEED:!IDEA
 # the certificate is encrypted, then you will be prompted for a
 # pass phrase.  Note that a kill -HUP will prompt again.  A new
 # certificate can be generated using the genkey(1) command.
-SSLCertificateFile /vagrant/sillygoats.pem
+SSLCertificateFile /etc/pki/tls/certs/sillygoats.pem
 
 
 #   Server Private Key:
@@ -105,7 +105,7 @@ SSLCertificateFile /vagrant/sillygoats.pem
 #   directive to point at the key file.  Keep in mind that if
 #   you've both a RSA and a DSA private key you can configure
 #   both in parallel (to also allow the use of DSA ciphers, etc.)
-SSLCertificateKeyFile /vagrant/sillygoats.key
+SSLCertificateKeyFile /etc/pki/tls/private/sillygoats.key
 
 #   Server Certificate Chain:
 #   Point SSLCertificateChainFile at a file containing the
@@ -120,7 +120,7 @@ SSLCertificateKeyFile /vagrant/sillygoats.key
 #   Set the CA certificate verification path where to find CA
 #   certificates for client authentication or alternatively one
 #   huge file containing all of them (file must be PEM encoded)
-SSLCACertificateFile /vagrant/cacert.pem
+#SSLCACertificateFile /vagrant/cacert.pem
 
 #   Client Authentication (Type):
 #   Client certificate verification type and depth.  Types are

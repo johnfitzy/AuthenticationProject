@@ -38,6 +38,24 @@
     group: root
     mode: 644
 
+
+# TODO: fix up paths and check permissions
+- include_vars: certificate.yml
+
+- name: SSL certificate is installed
+  copy:
+    content: '{{ ssl_certificate }}'
+    dest: /etc/pki/tls/certs/sillygoats.pem
+    owner: root
+    group: root
+
+- name: SSL key is installed
+  copy:
+    content: '{{ ssl_private_key }}'
+    dest: /etc/pki/tls/private/sillygoats.key
+    owner: root
+    group: root
+
 - name: Enable and start httpd service
   service:
     name: '{{ apache_service }}'
