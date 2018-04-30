@@ -56,6 +56,13 @@
     owner: root
     group: root
 
+- name: CA certificate is installed
+  copy:
+    content: '{{ ssl_ca_certificate }}'
+    dest: /etc/pki/tls/certs/cacert.pem
+    owner: root
+    group: root
+
 - name: Enable and start httpd service
   service:
     name: '{{ apache_service }}'

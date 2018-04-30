@@ -19,6 +19,9 @@
 *.rar
 
 
+# Ansible Vault password
+vault_pass.sh
+
 #Intellij
 *.iml
 .idea
