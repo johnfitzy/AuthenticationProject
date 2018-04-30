@@ -8,10 +8,10 @@
     - wildfly
     - datasource
 
-#- hosts: web
-#  become: yes
-#  roles:
-#    - httpd
+- hosts: web
+  become: yes
+  roles:
+    - httpd
 #
 #- hosts: dat
 #  become: yes
