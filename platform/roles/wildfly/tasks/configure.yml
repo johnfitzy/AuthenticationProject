@@ -34,8 +34,12 @@
     dest: /etc/default/wildfly.conf
 
 - name: TEST
-  command: whoami > test
+  command: whoami
+  register: username_on_host
 
+- name: DEBUG
+  debug:
+    msg: "{{ username_on_host.stdout }}"
 
 - name: Copy init script
   copy:
