@@ -49,8 +49,6 @@
   when: ansible_service_mgr in ['init', 'upstart']
   notify:
     - restart wildfly
-    #    - change standalone data mode
-
 
 - name: Copy wildfly systemd unit file
   template:
@@ -62,20 +60,6 @@
   when: ansible_service_mgr == 'systemd'
   notify:
     - restart wildfly
-#    - change standalone data mode
-
-#- name: Copy init script
-#  copy:
-#    src: '{{ wildfly_init_file }}'
-#    dest: /etc/init.d/wildfly
-#    mode: 0744
-
-
-#- name: Create service
-#  copy:
-#    src: wildfly.service.j2
-#    dest: /usr/lib/systemd/system/
-
 
 - name: Enable and start wildfly service
   service:
