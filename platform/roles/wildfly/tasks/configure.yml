@@ -32,7 +32,11 @@
     state: link
     src: '{{ wildfly_conf_dir }}/wildfly.conf'
     dest: /etc/default/wildfly.conf
-#
+
+- name: TEST
+  command: whoami > test
+
+
 - name: Copy init script
   copy:
     src: '{{ wildfly_init_file }}'
