@@ -3,6 +3,26 @@ stages:
   - build
   - deploy
 
+run_unit_tests:
+  stage: test
+  tags:
+    - mvn
+  script:
+    - mvn -f build/pom.xml test
+
+build_app:
+  stage: build
+  tags:
+    - mvn
+  script:
+    - mvn -f build/pom.xml package
+  artifacts:
+    expire_in: 1 day
+    paths:
+      - build/api-admin/target/*.war
+      - build/webservice/target/*.war
+      - build/database/target/*.tar.gz
+
 test_deploy:
   stage: deploy
   image: $CI_REGISTRY/255/255-ansible-vcd
