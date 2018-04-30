@@ -3,26 +3,6 @@ stages:
   - build
   - deploy
 
-run_unit_tests:
-  stage: test
-  tags:
-    - mvn
-  script:
-    - mvn -f build/pom.xml test
-
-build_app:
-  stage: build
-  tags:
-    - mvn
-  script:
-    - mvn -f build/pom.xml package
-  artifacts:
-    expire_in: 1 day
-    paths:
-      - build/api-admin/target/*.war
-      - build/webservice/target/*.war
-      - build/database/target/*.tar.gz
-
 test_deploy:
   stage: deploy
   image: $CI_REGISTRY/255/255-ansible-vcd
@@ -35,6 +15,8 @@ test_deploy:
     - mkdir -p ~/.ssh
     - chmod 700 ~/.ssh
   script:
+    - ssh administrator@172.24.131.122 echo admin-ok
+    - ssh -o User=administrator -o 'ProxyCommand=ssh -a -W %h:%p -q administrator@172.24.131.122' 10.0.0.6 echo app-login-ok
     - ansible-playbook -i platform/inventories/dcsg/inventory --extra-vars "$ANSIBLE_OPTIONS ansible_sudo_pass=$APP_SUDO_PASSWORD" --user administrator platform/deploy_devlab.yml -vvvvv
   environment:
     name: $CI_COMMIT_REF_SLUG
