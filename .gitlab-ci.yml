@@ -16,7 +16,7 @@ test_deploy:
     - chmod 700 ~/.ssh
   script:
     - ssh  -vvvvv -o StrictHostKeyChecking=no administrator@172.24.131.122 echo admin-ok
-    - ssh  -vvvvv -o User=administrator -o 'ProxyCommand=ssh -a -W %h:%p -q administrator@172.24.131.122' 10.0.0.6 echo app-login-ok
+    - ssh  -vvvvv -o StrictHostKeyChecking=no -o User=administrator -o 'ProxyCommand=ssh -a -W %h:%p -q -o administrator@172.24.131.122' 10.0.0.6 echo app-login-ok
     - ansible-playbook -i platform/inventories/dcsg/inventory --extra-vars "$ANSIBLE_OPTIONS ansible_sudo_pass=$APP_SUDO_PASSWORD" --user administrator platform/deploy_devlab.yml -vvvvv
   environment:
     name: $CI_COMMIT_REF_SLUG
