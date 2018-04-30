@@ -27,7 +27,7 @@ test_deploy:
   stage: deploy
   image: $CI_REGISTRY/255/255-ansible-vcd
   variables:
-    ANSIBLE_OPTIONS: "feature_name=$CI_COMMIT_REF_SLUG fronting_host=web-demo-$CI_COMMIT_REF_SLUG webhost_dns=$CI_COMMIT_REF_SLUG.172.24.131.122.xip.io state_fe_be_entry=absent --vault-id=$ANSIBLE_VAULT"
+    ANSIBLE_OPTIONS: "feature_name=$CI_COMMIT_REF_SLUG fronting_host=web-demo-$CI_COMMIT_REF_SLUG webhost_dns=$CI_COMMIT_REF_SLUG.172.24.131.122.xip.io state_fe_be_entry=absent --vault-id $ANSIBLE_VAULT"
     ANSIBLE_FORCE_COLOR: "true"
   before_script:
     - eval $(ssh-agent -s)
