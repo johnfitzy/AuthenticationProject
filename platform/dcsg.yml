@@ -2,6 +2,7 @@
 
 - hosts: app
   become: yes
+  user: administrator
   roles:
     - common
     - wildfly

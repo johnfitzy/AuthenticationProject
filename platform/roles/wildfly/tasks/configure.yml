@@ -32,13 +32,19 @@
     state: link
     src: '{{ wildfly_conf_dir }}/wildfly.conf'
     dest: /etc/default/wildfly.conf
-
-# Change this to sim link
+#
 - name: Copy init script
   copy:
     src: '{{ wildfly_init_file }}'
     dest: /etc/init.d/wildfly
     mode: 0744
+
+
+#- name: Create service
+#  copy:
+#    src: wildfly.service
+#    dest: /usr/lib/systemd/system/
+
 
 - name: Enable and start wildfly service
   service:
