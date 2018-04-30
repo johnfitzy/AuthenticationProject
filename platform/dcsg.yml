@@ -7,13 +7,13 @@
     - wildfly
     - datasource
 
-- hosts: web
-  become: yes
-  roles:
-    - httpd
-
-- hosts: dat
-  become: yes
-  roles:
-    - mysql
-    - flyway
+#- hosts: web
+#  become: yes
+#  roles:
+#    - httpd
+#
+#- hosts: dat
+#  become: yes
+#  roles:
+#    - mysql
+#    - flyway
