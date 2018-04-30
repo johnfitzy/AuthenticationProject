@@ -41,16 +41,39 @@
   debug:
     msg: "{{ username_on_host.stdout }}"
 
-- name: Copy init script
-  copy:
+- name: Create symlink to upstream init script
+  file:
+    state: link
     src: '{{ wildfly_init_file }}'
     dest: /etc/init.d/wildfly
-    mode: 0744
+  when: ansible_service_mgr in ['init', 'upstart']
+  notify:
+    - restart wildfly
+    #    - change standalone data mode
+
+
+- name: Copy wildfly systemd unit file
+  template:
+    src: wildfly.service.j2
+    dest: '{{ wildfly_systemd_dir }}/wildfly.service.j2'
+    owner: root
+    group: root
+    mode: 0640
+  when: ansible_service_mgr == 'systemd'
+  notify:
+    - restart wildfly
+#    - change standalone data mode
+
+#- name: Copy init script
+#  copy:
+#    src: '{{ wildfly_init_file }}'
+#    dest: /etc/init.d/wildfly
+#    mode: 0744
 
 
 #- name: Create service
 #  copy:
-#    src: wildfly.service
+#    src: wildfly.service.j2
 #    dest: /usr/lib/systemd/system/
 
 
