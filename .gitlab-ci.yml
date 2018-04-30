@@ -34,9 +34,12 @@ test_deploy:
     - echo "$SSH_PRIV_KEY" | tr -d '\r' | ssh-add - > /dev/null
     - mkdir -p ~/.ssh
     - chmod 700 ~/.ssh
+    - echo '#!/usr/bin/env bash' >> ~/test.sh
+    - echo 'echo $ANSIBLE_VAULT_PASS' >> ~/test.sh
+    - chmod u+x ~/test.sh
   script:
     - platform/./gitlab_ansible_vault.sh
-    #- ansible-playbook -i platform/inventories/dcsg/inventory --extra-vars "$ANSIBLE_OPTIONS ansible_sudo_pass=$APP_SUDO_PASSWORD" --user administrator platform/dcsg.yml --vault-password-file platform/./gitlab_ansible_vault.sh
+    #- ansible-playbook -i platform/inventories/dcsg/inventory --extra-vars "$ANSIBLE_OPTIONS ansible_sudo_pass=$APP_SUDO_PASSWORD" --user administrator platform/dcsg.yml --vault-password-file test.sh
   environment:
     name: $CI_COMMIT_REF_SLUG
     action: stop
