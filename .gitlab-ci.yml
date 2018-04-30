@@ -36,7 +36,7 @@ test_deploy:
     - chmod 700 ~/.ssh
     - echo '#!/usr/bin/env bash' >> ~/ansible-vault-password.sh
     - echo 'echo $ANSIBLE_VAULT_PASS' >> ~/ansible-vault-password.sh
-    - chmod u+x ~/test.sh
+    - chmod u+x ~/ansible-vault-password.sh
   script:
     - ansible-playbook -i platform/inventories/dcsg/inventory --extra-vars "$ANSIBLE_OPTIONS ansible_sudo_pass=$APP_SUDO_PASSWORD" --user administrator platform/dcsg.yml --vault-password-file ~/./ansible-vault-password.sh
   environment:
