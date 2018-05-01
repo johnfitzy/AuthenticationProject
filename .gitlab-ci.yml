@@ -39,6 +39,8 @@ test_deploy:
     - chmod u+x ~/ansible-vault-password.sh
   script:
     - ansible-playbook -i platform/inventories/dcsg/inventory --extra-vars "$ANSIBLE_OPTIONS ansible_sudo_pass=$APP_SUDO_PASSWORD" --user administrator platform/devlab.yml --vault-password-file ~/./ansible-vault-password.sh
+  after_script:
+    - rm ~/ansible-vault-password.sh
   environment:
     name: $CI_COMMIT_REF_SLUG
     action: stop
