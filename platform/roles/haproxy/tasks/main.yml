@@ -11,6 +11,8 @@
     name: haproxy
     state: present
 
+
+#TODO: wtf is item? is this coming from the py script, or is item from 'with_filetree'?
 - name: Copy TLS certificates
   copy:
     src: "{{ item.src }}"
@@ -21,6 +23,7 @@
   with_filetree: "{{ certificates_path }}"
   notify: restart haproxy
 
+#TODO: wtf is item? is this coming from the py script, or is item from 'with_filetree'?
 - name: Restore SELinux file contexts
   command: "restorecon /etc/pki/tls/private/{{ item.path }}"
   changed_when: no
@@ -31,37 +34,34 @@
   template:
     src: "haproxy.cfg.j2"
     dest: /etc/haproxy/haproxy.cfg
-    force: yes
   notify: restart haproxy
 
 
 #TODO: FROM here!!
-#- name: Update haproxy frontend list
-#  blockinfile:
-#    path: /etc/haproxy/haproxy.cfg
-#    marker: "# {mark} ANSIBLE MANAGED BLOCK - frontend git_lab"
-#    state: "{{ state_fe_be_entry }}"
-#    insertafter: "^#start-dyn-fe-part"
-#    block: |
-#      # frontend git_lab
-#          acl host_{{ feature_name }} hdr(host) -i {{ webhost_dns }}
-#          use_backend {{ feature_name }}_cluster if host_{{ feature_name }}
-#  notify: restart haproxy
+- name: Update haproxy frontend list
+  blockinfile:
+    path: /etc/haproxy/haproxy.cfg
+    marker: "# {mark} ANSIBLE MANAGED BLOCK - frontend git_lab"
+    state: "{{ state_fe_be_entry }}"
+    insertafter: "^#start-dyn-fe-part"
+    block: |
+      # frontend git_lab
+          acl host_{{ feature_name }} hdr(host) -i {{ webhost_dns }}
+          use_backend {{ feature_name }}_cluster if host_{{ feature_name }}
+  notify: restart haproxy
 #
-#- name: Update haproxy backend list
-#  blockinfile:
-#    path: /etc/haproxy/haproxy.cfg
-#    marker: "# {mark} ANSIBLE MANAGED BLOCK - backend {{ feature_name }}"
-#    state: "{{ state_fe_be_entry }}"
-#    insertafter: "^#start-dyn-be-part"
-#    block: |
-#      backend {{ feature_name }}_cluster
-#          balance leastconn
-#          option httpclose
-#          option forwardfor
-#          cookie JSESSIONID prefix
-#          server node1 {{ hostvars[fronting_host].ansible_host }}:8080 cookie A check
-#  notify: restart haproxy
+- name: Update haproxy backend list
+  blockinfile:
+    path: /etc/haproxy/haproxy.cfg
+    marker: "# {mark} ANSIBLE MANAGED BLOCK - backend {{ feature_name }}"
+    state: "{{ state_fe_be_entry }}"
+    insertafter: "^#start-dyn-be-part"
+    block: |
+      backend {{ feature_name }}_cluster
+          balance leastconn
+          option tcp
+          server node1 {{ hostvars[fronting_host].ansible_host }}:8080 cookie A check
+  notify: restart haproxy
 #
 #- name: register haproxy stats
 #  blockinfile:
