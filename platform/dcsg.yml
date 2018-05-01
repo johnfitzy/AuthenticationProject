@@ -7,6 +7,13 @@
     - common
     - wildfly
     - datasource
+  tasks:
+    - name: Deploy App
+      copy:
+        src: build/api-admin/target/api-admin.war
+#        src: build/webservice/target/webservice.war
+        dest: /opt/wildfly/standalone/deployments/
+
 
 - hosts: web
   become: yes
@@ -20,3 +27,4 @@
   roles:
     - mysql
     - flyway
+
