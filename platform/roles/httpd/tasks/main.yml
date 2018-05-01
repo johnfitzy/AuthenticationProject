@@ -39,7 +39,6 @@
     mode: 644
 
 
-# TODO: fix up paths and check permissions
 - include_vars: certificate.yml
 
 - name: SSL certificate is installed

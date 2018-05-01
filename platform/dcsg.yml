@@ -10,11 +10,13 @@
 
 - hosts: web
   become: yes
+  user: administrator
   roles:
     - httpd
-#
-#- hosts: dat
-#  become: yes
-#  roles:
-#    - mysql
-#    - flyway
+
+- hosts: dat
+  become: yes
+  user: administrator
+  roles:
+    - mysql
+    - flyway
