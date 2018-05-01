@@ -1,0 +1,8 @@
+---
+dns_domain: .{{ ip_proxy }}.xip.io
+
+certificates_path: "tls/"
+
+configure_selinux: no
+
+state_fe_be_entry: present

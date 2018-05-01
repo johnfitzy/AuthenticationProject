@@ -1,0 +1,82 @@
+---
+- name: Allow haproxy to bind on all TCP ports
+  seboolean:
+    name: haproxy_connect_any
+    state: yes
+    persistent: yes
+  when: configure_selinux | bool    
+
+- name: Install HAProxy
+  package:
+    name: haproxy
+    state: present
+
+- name: Copy TLS certificates
+  copy:
+    src: "{{ item.src }}"
+    dest: "/etc/pki/tls/private/{{ item.path }}"
+    owner: root
+    group: haproxy
+    mode: '0440'
+  with_filetree: "{{ certificates_path }}"
+  notify: restart haproxy
+
+- name: Restore SELinux file contexts
+  command: "restorecon /etc/pki/tls/private/{{ item.path }}"
+  changed_when: no
+  with_filetree: "{{ certificates_path }}"
+  when: configure_selinux | bool
+  
+- name: Haproxy service configuration
+  template:
+    src: "haproxy.cfg.j2"
+    dest: /etc/haproxy/haproxy.cfg
+    force: no
+  notify: restart haproxy
+
+
+#TODO: FROM here!!
+#- name: Update haproxy frontend list
+#  blockinfile:
+#    path: /etc/haproxy/haproxy.cfg
+#    marker: "# {mark} ANSIBLE MANAGED BLOCK - frontend {{ feature_name }}"
+#    state: "{{ state_fe_be_entry }}"
+#    insertafter: "^#start-dyn-fe-part"
+#    block: |
+#      # frontend {{ feature_name }}
+#          acl host_{{ feature_name }} hdr(host) -i {{ webhost_dns }}
+#          use_backend {{ feature_name }}_cluster if host_{{ feature_name }}
+#  notify: restart haproxy
+#
+#- name: Update haproxy backend list
+#  blockinfile:
+#    path: /etc/haproxy/haproxy.cfg
+#    marker: "# {mark} ANSIBLE MANAGED BLOCK - backend {{ feature_name }}"
+#    state: "{{ state_fe_be_entry }}"
+#    insertafter: "^#start-dyn-be-part"
+#    block: |
+#      backend {{ feature_name }}_cluster
+#          balance leastconn
+#          option httpclose
+#          option forwardfor
+#          cookie JSESSIONID prefix
+#          server node1 {{ hostvars[fronting_host].ansible_host }}:8080 cookie A check
+#  notify: restart haproxy
+#
+#- name: register haproxy stats
+#  blockinfile:
+#    path: /etc/haproxy/haproxy.cfg
+#    marker: "# {mark} ANSIBLE MANAGED BLOCK - stats"
+#    block: |
+#        listen stats
+#            bind :9000
+#            stats uri /
+#            stats enable
+#            stats auth username:password
+#  notify: restart haproxy
+
+- name: Enable haproxy service
+  service:
+    name: haproxy
+    enabled: yes
+    daemon_reload: yes
