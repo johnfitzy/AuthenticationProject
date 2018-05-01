@@ -13,8 +13,8 @@ defaults
     log     global
     mode    tcp
     option  tcplog
+    option  dontlognull
     retries 3
-    option redispatch
     timeout connect  5000
     timeout client  10000
     timeout server  600000
