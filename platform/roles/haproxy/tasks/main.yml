@@ -60,7 +60,7 @@
       backend {{ feature_name }}_cluster
           balance leastconn
           option tcp
-          server node1 {{ hostvars[fronting_host].ansible_host }}:8080 cookie A check
+          server node1 web-demo-$CI_COMMIT_REF_SLUG:8080 cookie A check
   notify: restart haproxy
 #
 #- name: register haproxy stats
