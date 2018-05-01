@@ -21,6 +21,12 @@
   roles:
     - httpd
 
+- hosts: proxy
+  become: yes
+  user: administrator
+  roles:
+    - haproxy
+
 - hosts: dat
   become: yes
   user: administrator
