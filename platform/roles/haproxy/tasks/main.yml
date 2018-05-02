@@ -42,7 +42,7 @@
   blockinfile:
     path: /etc/haproxy/haproxy.cfg
     marker: "# {mark} ANSIBLE MANAGED BLOCK - frontend git_lab"
-    state: "{{ state_fe_be_entry }}"
+    state: present
     insertafter: "^#start-dyn-fe-part"
     unsafe_writes: yes
     block: |
