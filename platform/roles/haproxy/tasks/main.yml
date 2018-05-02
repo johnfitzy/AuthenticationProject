@@ -63,11 +63,11 @@
     block: |
       backend {{ feature_name }}_cluster
           balance leastconn
-#          option tcp
-          mode   tcp
+          mode tcp
           server node1 10.0.0.3:8080 cookie A check
   notify: restart haproxy
 
+#          option tcp
 #  fabians server node1
 #  server node1 10.0.0.8:8080 cookie A check
 
