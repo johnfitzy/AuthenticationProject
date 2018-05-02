@@ -34,6 +34,7 @@
   template:
     src: "haproxy.cfg.j2"
     dest: /etc/haproxy/haproxy.cfg
+#    force: no
   notify: restart haproxy
 
 
@@ -63,8 +64,18 @@
       backend {{ feature_name }}_cluster
           balance leastconn
           option tcp
-          server node1 {{ fronting_host }}.ansible_host:8080 cookie A check
+          server node1 10.0.0.3:8080 cookie A check
   notify: restart haproxy
+
+#  fabians server node1
+#  server node1 10.0.0.8:8080 cookie A check
+
+
+#  acl host_git-lab hdr(host) -i git-lab.172.24.131.122.xip.io
+
+
+#  demo.master.172.24.131.122.xip.io
+
 #
 #- name: register haproxy stats
 #  blockinfile:
