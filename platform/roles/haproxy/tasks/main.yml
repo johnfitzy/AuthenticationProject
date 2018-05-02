@@ -37,11 +37,12 @@
   notify: restart haproxy
 
 
-#TODO: FROM here!!
+#TODO: Note that state was set to state_fe_be_entry which in defaults was set to present and was then overridden with a command line arg
 - name: Update haproxy frontend list
   blockinfile:
     path: /etc/haproxy/haproxy.cfg
     marker: "# {mark} ANSIBLE MANAGED BLOCK - frontend git_lab"
+#    state: "{{ state_fe_be_entry }}"
     state: present
     insertafter: "^#start-dyn-fe-part"
     unsafe_writes: yes
@@ -55,7 +56,8 @@
   blockinfile:
     path: /etc/haproxy/haproxy.cfg
     marker: "# {mark} ANSIBLE MANAGED BLOCK - backend {{ feature_name }}"
-    state: "{{ state_fe_be_entry }}"
+    state: present
+#    state: "{{ state_fe_be_entry }}"
     insertafter: "^#start-dyn-be-part"
     block: |
       backend {{ feature_name }}_cluster
