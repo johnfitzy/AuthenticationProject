@@ -63,7 +63,7 @@
     block: |
       backend {{ feature_name }}_cluster
           balance leastconn
-          server node1 10.0.0.3.ansible_host:80  cookie A check
+          server node1 10.0.0.3.ansible_host:80 A check
   notify: restart haproxy
 
 #          option tcp
