@@ -25,12 +25,12 @@
 # -------------------
 
 # This command will fail when the root password was set previously
-#- name: Check if root password is set
-#  shell: >
-#    mysqladmin -u root status
-#  changed_when: false
-#  failed_when: false
-#  register: root_pwd_check
+- name: Check if root password is set
+  shell: >
+    mysqladmin -u root status
+  changed_when: false
+  failed_when: false
+  register: root_pwd_check
 
 
 # TODO: this is dodgy! Probably need to create a new user for Wildfly and grant it safe permissions
