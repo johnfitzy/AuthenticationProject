@@ -33,6 +33,7 @@
   register: root_pwd_check
 
 
+# TODO: this is dodgy!
 - name: Set MariaDB root password for the first time
   mysql_user:
     name: root
@@ -41,12 +42,11 @@
     priv: '*.*:ALL'
     state: present
   with_items:
-    - '{{ mariadb_host }}'
     - 127.0.0.1
     - ::1
     - 10.0.0.1
     - '{{ mariadb_ip_address }}'
-    - 10.0.0.6
+    -  '{{ wildfly_ip_address }}'
     - localhost
   when: root_pwd_check.rc == 0
 

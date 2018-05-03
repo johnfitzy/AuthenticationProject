@@ -21,6 +21,7 @@
   roles:
     - httpd
 
+#TODO: this is commented out because I need to check what I've done manuelly before runing this on devlab
 #- hosts: proxy
 #  become: yes
 #  user: administrator
