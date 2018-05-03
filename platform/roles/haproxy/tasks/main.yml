@@ -34,7 +34,7 @@
   template:
     src: "haproxy.cfg.j2"
     dest: /etc/haproxy/haproxy.cfg
-#    force: no
+    force: no
   notify: restart haproxy
 
 

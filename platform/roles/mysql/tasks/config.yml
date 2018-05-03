@@ -46,6 +46,7 @@
     - ::1
     - 10.0.0.1
     - '{{ mariadb_ip_address }}'
+    - 10.0.0.6
     - localhost
   when: root_pwd_check.rc == 0
 
