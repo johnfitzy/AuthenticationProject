@@ -49,7 +49,7 @@
     - '{{ mariadb_ip_address }}'
     -  '{{ wildfly_ip_address }}'
     - localhost
-#  when: root_pwd_check.rc == 0
+  when: root_pwd_check.rc == 0
 
 
 - name: Remove the test database
