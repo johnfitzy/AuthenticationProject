@@ -34,7 +34,7 @@
 
 
 # TODO: this is dodgy! Probably need to create a new user for Wildfly and grant it safe permissions
-# TODO: also this is not running other
+# TODO: also this is not running a second time because of the variable that is registered in the previous task
 - name: Set MariaDB root password for the first time
   mysql_user:
     name: root
@@ -49,7 +49,7 @@
     - '{{ mariadb_ip_address }}'
     -  '{{ wildfly_ip_address }}'
     - localhost
-  when: root_pwd_check.rc == 0
+#  when: root_pwd_check.rc == 0
 
 
 - name: Remove the test database
