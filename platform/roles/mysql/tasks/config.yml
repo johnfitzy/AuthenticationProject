@@ -1,9 +1,5 @@
 ---
 
-# -------------------
-# Config
-# -------------------
-
 #TODO: FIX this up
 
 #- name: Install server config file
@@ -20,10 +16,6 @@
   notify: restart mariadb
 
 
-# -------------------
-# Root user / secure installation
-# -------------------
-
 # This command will fail when the root password was set previously
 - name: Check if root password is set
   shell: >
@@ -32,6 +24,9 @@
   failed_when: false
   register: root_pwd_check
 
+- name: Debug
+  debug:
+    msg: root_pwd_check
 
 # TODO: this is dodgy! Probably need to create a new user for Wildfly and grant it safe permissions
 # TODO: also this is not running a second time because of the variable that is registered in the previous task
@@ -67,19 +62,6 @@
     login_user: root
     login_password: "{{ mariadb_root_password }}"
     state: absent
-
-# -------------------
-# Set up user
-# -------------------
-#TODO: fix this up
-#- mysql_user:
-#    name: john
-#    password: password
-#    priv: '*.*:ALL'
-#    login_user: root
-#    login_password: "{{ mariadb_root_password }}"
-#    state: present
-
 
 #- name: Copy the root credentials as .my.cnf file
 #  template: src=root.cnf.j2 dest=~/.my.cnf mode=0600
