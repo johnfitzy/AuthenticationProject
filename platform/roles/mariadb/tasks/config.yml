@@ -1,7 +1,5 @@
 ---
 
-#TODO: FIX this up
-
 #- name: Install server config file
 #  template:
 #    src: etc_my.cnf.d_server.cnf.j2
@@ -15,7 +13,6 @@
     dest: "{{ mariadb_config_network }}"
   notify: restart mariadb
 
-
 # This command will fail when the root password was set previously
 - name: Check if root password is set
   shell: >
@@ -23,10 +20,6 @@
   changed_when: false
   failed_when: false
   register: root_pwd_check
-
-- name: Debug
-  debug:
-    msg: root_pwd_check.stdout
 
 # TODO: this is dodgy! Probably need to create a new user for Wildfly and grant it safe permissions
 # TODO: also this is not running a second time because of the variable that is registered in the previous task
