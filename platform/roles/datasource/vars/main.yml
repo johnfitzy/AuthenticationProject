@@ -6,5 +6,5 @@ wildfly_deployments: /opt/wildfly/standalone/deployments
 maria_db_download_url: https://downloads.mariadb.com/Connectors/java/connector-java-2.2.3
 maria_db_version_jar: mariadb-java-client-2.2.3.jar
 maria_db_jndi_name: java:/MariaDB
-maria_db_con: "jdbc:mysql://{{ mariadb_ip_address }}:3306/database"
+maria_db_con: "jdbc:mysql://{{ mariadb_bind_address }}:3306/database"
 maria_db_ds_name: MariaDB

@@ -12,7 +12,7 @@ maria_db_user: root
 
 # Vagrant IP addresses
 wildfly_ip_address: 10.255.255.2
-mariadb_ip_address: 10.255.255.4
+mariadb_bind_address: 10.255.255.4
 httpd_ip_address: 10.255.255.11
 
 path_to_sql: /vagrant/build/database/target/

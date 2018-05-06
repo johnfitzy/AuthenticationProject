@@ -41,7 +41,7 @@
     - 127.0.0.1
     - ::1
     - 10.0.0.1
-    - '{{ mariadb_ip_address }}'
+    - '{{ mariadb_bind_address }}'
     -  '{{ wildfly_ip_address }}'
     - localhost
   when: root_pwd_check.rc == 0

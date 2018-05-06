@@ -12,7 +12,7 @@ mariadb_root_password: password
 maria_db_user: root
 
 
-mariadb_ip_address: 10.0.0.7
+mariadb_bind_address: 10.0.0.7
 wildfly_ip_address: 10.0.0.6
 httpd_ip_address: 10.0.0.3
 #WTF?
