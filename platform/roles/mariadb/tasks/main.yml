@@ -1,6 +1,7 @@
 ---
 
 - include: install.yml
-- include: config.yml
 - include: root-password.yml
+- include: config.yml
+- include: users.yml
 

@@ -1,5 +1,6 @@
 ---
 
+#TODO: add this in as required
 #- name: Install server config file
 #  template:
 #    src: etc_my.cnf.d_server.cnf.j2
@@ -7,54 +8,12 @@
 #  notify: restart mariadb
 #  tags: mariadb
 
+
 - name: Install network config file
   template:
     src: etc_my.cnf.d_network.cnf.j2
     dest: "{{ mariadb_config_network }}"
   notify: restart mariadb
-
-# This command will fail when the root password was set previously
-- name: Check if root password is set
-  shell: >
-    mysqladmin -u root status
-  changed_when: false
-  failed_when: false
-  register: root_pwd_check
-
-# TODO: this is dodgy! Probably need to create a new user for Wildfly and grant it safe permissions
-# TODO: also this is not running a second time because of the variable that is registered in the previous task
-- name: Set MariaDB root password for the first time
-  mysql_user:
-    name: root
-    password: "{{ mariadb_root_password }}"
-    host: '{{ item }}'
-    priv: '*.*:ALL'
-    state: present
-  with_items:
-    - 127.0.0.1
-    - ::1
-    - 10.0.0.1
-    - '{{ mariadb_bind_address }}'
-    -  '{{ wildfly_ip_address }}'
-    - localhost
-  when: root_pwd_check.rc == 0
-
-
-- name: Remove the test database
-  mysql_db:
-    name: test
-    login_user: root
-    login_password:  "{{ mariadb_root_password }}"
-    state: absent
-
-
-- name: Remove anonymous users
-  mysql_user:
-    name: ''
-    host_all: yes
-    login_user: root
-    login_password: "{{ mariadb_root_password }}"
-    state: absent
 
 #- name: Copy the root credentials as .my.cnf file
 #  template: src=root.cnf.j2 dest=~/.my.cnf mode=0600
