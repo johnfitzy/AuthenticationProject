@@ -32,6 +32,6 @@
   become: yes
   user: administrator
   roles:
-    - mysql
+    - mariadb
     - flyway
 
