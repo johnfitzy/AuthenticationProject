@@ -3,13 +3,11 @@
 
 mariadb_databases: []
 
-mariadb_users:
-  - name: wildfly
-    password: password
-    priv: '*.*:ALL,GRANT'
-    host: '{{ wildfly_ip_address }}'
-
-#mariadb_root_password: ''
+#mariadb_users:
+#  - name: wildfly
+#    password: password
+#    priv: '*.*:ALL,GRANT'
+#    host: '{{ wildfly_ip_address }}'
 
 mariadb_version: '10.2'
 

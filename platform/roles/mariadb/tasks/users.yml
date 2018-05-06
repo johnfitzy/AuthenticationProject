@@ -9,14 +9,39 @@
     state: absent
 
 
-
+#TODO: refactor this so you could have multiple users, see below commented out code
 - name: Create the users
   mysql_user:
-    name: "{{ item.name }}"
-    password: "{{ item.password }}"
-    host: "{{ item.host|default('localhost') }}"
-    priv: "{{ item.priv }}"
     login_user: root
     login_password: "{{ mariadb_root_password }}"
+    name: user
+    password: password
+    host: "{{ item }}"
+    priv: '*.*:ALL'
     state: present
-  with_items: "{{ mariadb_users }}"
+  with_items:
+    - 127.0.0.1
+    - ::1
+    - 10.0.0.1
+    - '{{ mariadb_bind_address }}'
+    - '{{ wildfly_ip_address }}'
+    - localhost
+
+
+#- name: Create the users
+#  mysql_user:
+#    name: "{{ item.name }}"
+#    password: "{{ item.password }}"
+#    host: "{{ item.host|default('localhost') }}"
+#    priv: "{{ item.priv }}"
+#    login_user: root
+#    login_password: "{{ mariadb_root_password }}"
+#    state: present
+#  with_items: "{{ mariadb_users }}"
+#  tags: mariadb
+#
+# this is a variable in defaults
+#mariadb_users:
+#  - name: john
+#    password: letmein
+#    priv: '*.*:ALL,GRANT'
