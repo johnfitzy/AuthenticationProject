@@ -33,13 +33,6 @@
     src: '{{ wildfly_conf_dir }}/wildfly.conf'
     dest: /etc/default/wildfly.conf
 
-- name: TEST
-  command: whoami
-  register: username_on_host
-
-- name: DEBUG
-  debug:
-    msg: "{{ username_on_host.stdout }}"
 
 - name: Create symlink to upstream init script
   file:
