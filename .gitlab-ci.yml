@@ -15,7 +15,7 @@ build_app:
   tags:
     - mvn
   script:
-    - mvn -f build/pom.xml package
+    - mvn -f build/pom.xml install
   artifacts:
     expire_in: 1 day
     paths:
