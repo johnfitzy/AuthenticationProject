@@ -1,25 +1,25 @@
 ---
 #TODO: tidy this up!
-- hosts: app
-  become: yes
-  user: administrator
-  roles:
-    - common
-    - wildfly
-    - datasource
-  tasks:
-    - name: Deploy App
-      copy:
-        src: ../build/api-admin/target/api-admin.war
-        src: ../build/webservice/target/webservice.war
-        dest: /opt/wildfly/standalone/deployments/
-
-
-- hosts: web
-  become: yes
-  user: administrator
-  roles:
-    - httpd
+#- hosts: app
+#  become: yes
+#  user: administrator
+#  roles:
+#    - common
+#    - wildfly
+#    - datasource
+#  tasks:
+#    - name: Deploy App
+#      copy:
+#        src: ../build/api-admin/target/api-admin.war
+#        src: ../build/webservice/target/webservice.war
+#        dest: /opt/wildfly/standalone/deployments/
+#
+#
+#- hosts: web
+#  become: yes
+#  user: administrator
+#  roles:
+#    - httpd
 
 #TODO: this is commented out because I need to check what I've done manuelly before runing this on devlab
 #- hosts: proxy
@@ -33,5 +33,5 @@
   user: administrator
   roles:
     - mariadb
-    - flyway
+#    - flyway
 
