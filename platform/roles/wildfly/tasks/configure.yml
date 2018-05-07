@@ -46,7 +46,6 @@
     state: link
     src: '{{ wildfly_init_file }}'
     dest: /etc/init.d/wildfly
-    mode: 0744
 
 - name: Copy wildfly systemd unit file
   template:
