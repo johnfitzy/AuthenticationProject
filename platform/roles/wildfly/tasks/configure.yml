@@ -39,7 +39,7 @@
 #    dest: /etc/init.d/wildfly
 #    mode: 0744
 
-#TODO: for vagrant errrr
+
 #- name: Create service
 #  copy:
 #    src: wildfly.service
