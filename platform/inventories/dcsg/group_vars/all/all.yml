@@ -15,13 +15,18 @@ maria_db_user: appUser
 mariadb_bind_address: 10.0.0.7
 wildfly_ip_address: 10.0.0.6
 httpd_ip_address: 10.0.0.3
-#WTF?
-mariadb_host: 10.0.0.7
+
+#TODO: for loop in mariadb users
+#example:
+#  - 127.0.0.1
+#  - ::1
+#  - '{{ mariadb_bind_address }}'
+#  - '{{ wildfly_ip_address }}'
+#  - localhost
 
 path_to_sql: build/database/target/
 
 # Fix this
-
 local_user: administrator
 local_group: administrator
 

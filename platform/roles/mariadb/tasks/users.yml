@@ -8,6 +8,7 @@
     login_password: "{{ mariadb_root_password }}"
     state: absent
 
+#TODO: loop through a list of hosts, dev lab doesn't need 10.0.0.1
 - name: Create the users
   mysql_user:
     login_user: root

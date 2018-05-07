@@ -33,19 +33,20 @@
     src: '{{ wildfly_conf_dir }}/wildfly.conf'
     dest: /etc/default/wildfly.conf
 
-- name: Copy init script
-  copy:
-    src: '{{ wildfly_init_file }}'
-    dest: /etc/init.d/wildfly
-    mode: 0744
-
-# TODO: below is working on dev_lab but not vagrant errr
-#- name: Create symlink to upstream init script
-#  file:
-#    state: link
+#Vagrant
+#- name: Copy init script
+#  copy:
 #    src: '{{ wildfly_init_file }}'
 #    dest: /etc/init.d/wildfly
 #    mode: 0744
+
+# TODO: below is working on dev_lab but not vagrant errr
+- name: Create symlink to upstream init script
+  file:
+    state: link
+    src: '{{ wildfly_init_file }}'
+    dest: /etc/init.d/wildfly
+    mode: 0744
 
 - name: Copy wildfly systemd unit file
   template:
