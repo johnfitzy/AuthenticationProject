@@ -21,7 +21,7 @@ build_app:
     paths:
       - build/api-admin/target/*.war
       - build/webservice/target/*.war
-      - build/database/target/authentication-app-sql-full.tar.gz
+      - build/database/target/*.tar.gz
 
 #TODO: why is state_fe_be_entry set to absent here? It means that the front and backend entries are not made in haproxy
 test_deploy:
