@@ -8,7 +8,7 @@ wildfly_admin_password: '{{ wildfly_secret_admin_password }}'
 
 mariadb_db_name: database
 mariadb_root_password: password
-maria_db_user: user
+maria_db_user: appUser
 
 # Vagrant IP addresses
 wildfly_ip_address: 10.255.255.2

@@ -32,29 +32,20 @@
     state: link
     src: '{{ wildfly_conf_dir }}/wildfly.conf'
     dest: /etc/default/wildfly.conf
-#
-#- name: Copy init script
-#  copy:
+
+- name: Copy init script
+  copy:
+    src: '{{ wildfly_init_file }}'
+    dest: /etc/init.d/wildfly
+    mode: 0744
+
+# TODO: below is working on dev_lab but not vagrant errr
+#- name: Create symlink to upstream init script
+#  file:
+#    state: link
 #    src: '{{ wildfly_init_file }}'
 #    dest: /etc/init.d/wildfly
 #    mode: 0744
-
-
-#- name: Create service
-#  copy:
-#    src: wildfly.service
-#    dest: /usr/lib/systemd/system/
-
-
-# TODO: below is working on dev_lab but not vagrant errr
-- name: Create symlink to upstream init script
-  file:
-    state: link
-    src: '{{ wildfly_init_file }}'
-    dest: /etc/init.d/wildfly
-  when: ansible_service_mgr in ['init', 'upstart']
-  notify:
-    - restart wildfly
 
 - name: Copy wildfly systemd unit file
   template:
@@ -63,9 +54,6 @@
     owner: root
     group: root
     mode: 0640
-  when: ansible_service_mgr == 'systemd'
-  notify:
-    - restart wildfly
 
 
 - name: Enable and start wildfly service
