@@ -13,8 +13,11 @@
         src: ../build/api-admin/target/api-admin.war
         src: ../build/webservice/target/webservice.war
         dest: /opt/wildfly/standalone/deployments/
+    - name: Deploy sql scripts
+      copy:
+        src: ../build/database/target/authentication-app-sql-full.tar.gz
+        dest: "{{ path_to_sql }}"
 
-#
 - hosts: web
   become: yes
   user: administrator
