@@ -22,6 +22,14 @@
   mysql_user:
     login_user: root
     login_password: "{{ mariadb_root_password }}"
+    name: stupid
+    password: stupid
+
+
+- name: Create the users
+  mysql_user:
+    login_user: root
+    login_password: "{{ mariadb_root_password }}"
     name: '{{ maria_db_user }}'
     password: '{{ mariadb_root_password }}'
     host: "{{ item }}"
