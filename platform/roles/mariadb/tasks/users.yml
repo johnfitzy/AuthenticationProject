@@ -8,6 +8,14 @@
     login_password: "{{ mariadb_root_password }}"
     state: absent
 
+- name: Remove previous run users
+  mysql_user:
+    name: '{{ maria_db_user }}'
+    host_all: yes
+    login_user: root
+    login_password: "{{ mariadb_root_password }}"
+    state: absent
+
 
 #TODO: refactor this so you could have multiple users, see below commented out code
 - name: Create the users
