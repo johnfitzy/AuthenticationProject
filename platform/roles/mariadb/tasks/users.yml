@@ -25,7 +25,6 @@
     - 10.0.0.1
     - '{{ mariadb_bind_address }}'
     - '{{ wildfly_ip_address }}'
-    -  172.24.131.122
     - localhost
 
 
