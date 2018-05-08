@@ -1,7 +1,7 @@
 stages:
 #  - test
   - build
-  - deploy
+#  - deploy
 
 #run_unit_tests:
 #  stage: test
@@ -17,28 +17,19 @@ stages:
 #  script:
 #    - mvn --version
 
-#build_app:
-#  stage: build
-#  tags:
-#    - mvn
-#  script:
-#    - mvn -f build/pom.xml package -X
-#  artifacts:
-#    expire_in: 1 day
-#    paths:
-#      - build/api-admin/target/*.war
-#      - build/webservice/target/*.war
-
-build_db:
+build_app:
   stage: build
   tags:
     - mvn
   script:
-    - mvn clean -f build/database/pom.xml package
-#  artifacts:
-#    expire_in: 1 day
-#    paths:
-#      - build/database/target/*.tar.gz
+    - mvn clean -f build/pom.xml package -X
+  artifacts:
+    expire_in: 1 day
+    paths:
+      - build/api-admin/target/*.war
+      - build/webservice/target/*.war
+      - build/database/target/*.tar.gz
+
 
 #TODO: why is state_fe_be_entry set to absent here? It means that the front and backend entries are not made in haproxy
 #test_deploy:
