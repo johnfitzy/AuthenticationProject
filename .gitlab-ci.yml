@@ -35,10 +35,10 @@ build_db:
     - mvn
   script:
     - mvn -f build/database/pom.xml package
-  artifacts:
-    expire_in: 1 day
-    paths:
-      - build/database/target/*.tar.gz
+#  artifacts:
+#    expire_in: 1 day
+#    paths:
+#      - build/database/target/*.tar.gz
 
 #TODO: why is state_fe_be_entry set to absent here? It means that the front and backend entries are not made in haproxy
 #test_deploy:
