@@ -129,6 +129,13 @@ SSLCACertificateFile /etc/pki/tls/certs/cacert.pem
 #   issuer chain before deciding the certificate is not valid.
 
 #   Require client cert
+# The depth actually is the maximum number of intermediate certificate issuers,
+# i.e. the number of CA certificates which are max allowed to be followed while
+# verifying the client certificate. A depth of 0 means that self-signed client
+# certificates are accepted only, the default depth of 1 means the client certificate
+# can be self-signed or has to be signed by a CA which is directly known to the server
+# (i.e. the CA's certificate is under SSLCACertificatePath), etc.
+
 SSLVerifyClient require
 SSLVerifyDepth  2
 
@@ -215,6 +222,12 @@ BrowserMatch "MSIE [2-5]" \
 #   compact non-error SSL logfile on a virtual host basis.
 CustomLog logs/ssl_request_log \
           "%t %h %{SSL_PROTOCOL}x %{SSL_CIPHER}x \"%r\" %b"
+
+# When this option is enabled, the standard set of SSL related CGI/SSI environment variables are created
+# In this case SSL_CLIENT_S_DN_CN is the clients common name from the cert
+# The ProxyPreserveHost directive is used to instruct Apache mod_proxy, when acting as a reverse proxy,
+# to preserve and retain the original Host: header from the client browser when constructing the proxied
+# request to send to the target server
 
 SSLOptions +StdEnvVars
 RequestHeader set ssl_client_cn "%{SSL_CLIENT_S_DN_CN}s"

@@ -1,5 +1,4 @@
 ---
-# This is still a work in progress
 - block:
     - name: Create Httpd
       group:
@@ -37,7 +36,6 @@
     owner: root
     group: root
     mode: 644
-
 
 - include_vars: certificate.yml
 
