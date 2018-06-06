@@ -12,6 +12,8 @@ wildfly_install_dir: /opt
 wildfly_dir: "{{ wildfly_install_dir }}/{{ wildfly_name }}"
 wildfly_dir_mode: 0750
 wildfly_create_symlink: true
+wildfly_systemd_dir: /usr/lib/systemd/system
+
 
 # Wildfly as a service
 wildfly_service: wildfly

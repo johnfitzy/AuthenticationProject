@@ -28,9 +28,11 @@ The end goal is to implement OAuth.
 ### TODO
 
 - Ansible: make the environment come up on GCSC or AWS
-- Properly store client cert CN in db (next thing to do)
+- Check the validity of the certs? Is Apache doing this?
 - Move toward OAuth
 - Fix up the database, for example I'm not sure if having one db is right, refactor the database module
+- look at Georges plays and refactor flyway and sql roles
+- vault passwords!
 
 
 ### Technologies / dependencies 

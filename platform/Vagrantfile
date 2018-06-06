@@ -18,6 +18,7 @@ end
 Vagrant.configure("2") do |config|
 
   config.vm.box = "centos7-ansible"
+  # https://tools.siam.education.govt.nz/sources/centos7.box
   config.vm.box_url = "https://tools.siam.education.govt.nz/sources/centos7.box"
   config.vm.box_check_update = false
   config.vm.box_download_insecure = true
@@ -54,6 +55,7 @@ Vagrant.configure("2") do |config|
       ansible.install            = true
       ansible.compatibility_mode = "2.0"
       ansible.install_mode       = "default"
+      ansible.vault_password_file = "platform/vault_pass.sh"
       ansible.playbook           = "platform/playbook.yml"
       ansible.inventory_path     = "platform/inventories/vagrant/inventory"
     end

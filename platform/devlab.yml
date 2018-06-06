@@ -1,0 +1,41 @@
+---
+#TODO: tidy this up!
+- hosts: app
+  become: yes
+  user: administrator
+  roles:
+    - common
+    - wildfly
+    - datasource
+  tasks:
+    - name: Deploy App
+      copy:
+        src: ../build/api-admin/target/api-admin.war
+        src: ../build/webservice/target/webservice.war
+        dest: /opt/wildfly/standalone/deployments/
+#    - name: Deploy sql scripts
+#      copy:
+#        src: ../build/database/target/authentication-app-sql-full.tar.gz
+#        dest: "{{ path_to_sql }}"
+
+- hosts: web
+  become: yes
+  user: administrator
+  roles:
+    - httpd
+
+#TODO: this is commented out because I need to check what I've done manuelly before runing this on devlab
+#- hosts: proxy
+#  become: yes
+#  user: administrator
+#  roles:
+#    - haproxy
+
+- hosts: dat
+  become: yes
+  user: administrator
+  roles:
+    - mariadb
+    - flyway
+    - migrations
+

@@ -7,7 +7,7 @@
     - wildfly
     - datasource
     - flyway
-    - mysql
+    - mariadb
     - migrations
     - httpd
 

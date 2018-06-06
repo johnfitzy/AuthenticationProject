@@ -1,21 +1,28 @@
 stages:
-  - test
+#  - test
   - build
-  - deploy
+#  - deploy
 
-run_unit_tests:
-  stage: test
-  tags:
-    - mvn
-  script:
-    - mvn -f build/pom.xml test
+#run_unit_tests:
+#  stage: test
+#  tags:
+#    - mvn
+#  script:
+#    - mvn -f build/pom.xml test
+
+#testing:
+#  stage: build
+#  tags:
+#    - mvn
+#  script:
+#    - mvn --version
 
 build_app:
   stage: build
   tags:
     - mvn
   script:
-    - mvn -f build/pom.xml package
+    - mvn clean -f build/pom.xml package -X
   artifacts:
     expire_in: 1 day
     paths:
@@ -23,29 +30,28 @@ build_app:
       - build/webservice/target/*.war
       - build/database/target/*.tar.gz
 
-test_deploy:
-  stage: deploy
-  image: $CI_REGISTRY/255/255-ansible-vcd
-  variables:
-    ANSIBLE_OPTIONS: "feature_name=$CI_COMMIT_REF_SLUG fronting_host=web-demo-$CI_COMMIT_REF_SLUG webhost_dns=$CI_COMMIT_REF_SLUG.172.24.131.122.xip.io state_fe_be_entry=absent"
-    ANSIBLE_FORCE_COLOR: "true"
-  before_script:
-    - eval $(ssh-agent -s)
-    - echo "$SSH_PRIV_KEY" | tr -d '\r' | ssh-add - > /dev/null
-    - mkdir -p ~/.ssh
-    - chmod 700 ~/.ssh
-  script:
-    - echo "****** This is pissing me off *****"
-    - echo
-    - echo $SSH_PRIV_KEY
-    - echo $APP_SUDO_PASSWORD
-    - ansible-playbook -i platform/inventories/dcsg/inventory --extra-vars "$ANSIBLE_OPTIONS ansible_sudo_pass=$APP_SUDO_PASSWORD" --user administrator platform/deploy_devlab.yml
-  environment:
-    name: $CI_COMMIT_REF_SLUG
-    action: stop
 
+#TODO: why is state_fe_be_entry set to absent here? It means that the front and backend entries are not made in haproxy
+#test_deploy:
+#  stage: deploy
+#  image: $CI_REGISTRY/255/255-ansible-vcd
+#  variables:
+#    ANSIBLE_OPTIONS: "feature_name=$CI_COMMIT_REF_SLUG fronting_host=web-demo-$CI_COMMIT_REF_SLUG webhost_dns=$CI_COMMIT_REF_SLUG.172.24.131.122.xip.io state_fe_be_entry=absent"
+#    ANSIBLE_FORCE_COLOR: "true"
+#  before_script:
+#    - eval $(ssh-agent -s)
+#    - echo "$SSH_PRIV_KEY" | tr -d '\r' | ssh-add - > /dev/null
+#    - mkdir -p ~/.ssh
+#    - chmod 700 ~/.ssh
+#    - echo '#!/usr/bin/env bash' >> ~/ansible-vault-password.sh
+#    - echo 'echo $ANSIBLE_VAULT_PASS' >> ~/ansible-vault-password.sh
+#    - chmod u+x ~/ansible-vault-password.sh
+#    - echo $CI_COMMIT_REF_SLUG
+#  script:
+#    - ansible-playbook -i platform/inventories/dcsg/inventory --extra-vars "$ANSIBLE_OPTIONS ansible_sudo_pass=$APP_SUDO_PASSWORD" --user administrator platform/devlab.yml -vvvv --vault-password-file ~/./ansible-vault-password.sh
+#  after_script:
+#    - rm ~/ansible-vault-password.sh
+#  environment:
+#    name: $CI_COMMIT_REF_SLUG
+#    action: stop
 
-#      ansible-playbook -i ansible/staging/devlab/inventory/ \ --extra-vars "$ANSIBLE_OPTIONS ansible_sudo_pass=$APP_SUDO_PASSWORD" \ --user ansibleuser \ ansible/app.yml
-
-
-#ansible-playbook -i ansible/staging/devlab/inventory/ --extra-vars "$ANSIBLE_OPTIONS ansible_sudo_pass=$PROXY_SUDO_PASSWORD" --user administrator \ ansible/proxy.yml

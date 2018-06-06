@@ -3,7 +3,6 @@ package ui.login;
 import java.io.IOException;
 import javax.enterprise.context.RequestScoped;
 import javax.faces.context.FacesContext;
-import javax.faces.webapp.FacesServlet;
 import javax.inject.Inject;
 import javax.inject.Named;
 import service.login.UserCredentialService;

@@ -1,0 +1,46 @@
+---
+
+- name: Remove anonymous users
+  mysql_user:
+    name: ''
+    host_all: yes
+    login_user: root
+    login_password: "{{ mariadb_root_password }}"
+    state: absent
+
+#TODO: loop through a list of hosts, dev lab doesn't need 10.0.0.1
+- name: Create the users
+  mysql_user:
+    login_user: root
+    login_password: "{{ mariadb_root_password }}"
+    name: '{{ maria_db_user }}'
+    password: '{{ mariadb_root_password }}'
+    host: "{{ item }}"
+    priv: '*.*:ALL'
+    state: present
+  with_items:
+    - 127.0.0.1
+    - ::1
+    - 10.0.0.1
+    - '{{ mariadb_bind_address }}'
+    - '{{ wildfly_ip_address }}'
+    - localhost
+
+
+#- name: Create the users
+#  mysql_user:
+#    name: "{{ item.name }}"
+#    password: "{{ item.password }}"
+#    host: "{{ item.host|default('localhost') }}"
+#    priv: "{{ item.priv }}"
+#    login_user: root
+#    login_password: "{{ mariadb_root_password }}"
+#    state: present
+#  with_items: "{{ mariadb_users }}"
+#  tags: mariadb
+#
+# this is a variable in defaults
+#mariadb_users:
+#  - name: john
+#    password: letmein
+#    priv: '*.*:ALL,GRANT'

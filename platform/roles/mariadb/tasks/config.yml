@@ -1,0 +1,20 @@
+---
+
+#TODO: add this in as required
+#- name: Install server config file
+#  template:
+#    src: etc_my.cnf.d_server.cnf.j2
+#    dest: "{{ mariadb_config_server }}"
+#  notify: restart mariadb
+#  tags: mariadb
+
+
+- name: Install network config file
+  template:
+    src: etc_my.cnf.d_network.cnf.j2
+    dest: "{{ mariadb_config_network }}"
+  notify: restart mariadb
+
+#- name: Copy the root credentials as .my.cnf file
+#  template: src=root.cnf.j2 dest=~/.my.cnf mode=0600
+

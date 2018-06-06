@@ -15,7 +15,7 @@ if [ -f "$file" ];then
 
 fi
 
-sudo sh -c  "echo export JAVA_HOME=/usr/lib/jvm/java-1.8.0-openjdk-1.8.0.161-0.b14.el7_4.x86_64/jre >> /etc/environment"
+sudo sh -c  "echo export JAVA_HOME=/usr/lib/jvm/java-1.8.0-openjdk-1.8.0.171-8.b10.el7_5.x86_64/jre >> /etc/environment"
 
 sudo nmcli con del enp0s8 | true
 sudo nmcli con add type ethernet ifname enp0s8 con-name enp0s8
