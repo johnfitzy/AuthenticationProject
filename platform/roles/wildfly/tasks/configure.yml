@@ -53,7 +53,7 @@
 - name: Copy wildfly systemd unit file
   template:
     src: wildfly.service.j2
-    dest: '{{ wildfly_systemd_dir }}/wildfly.service.j2'
+    dest: '{{ wildfly_systemd_dir }}/wildfly.service'
     owner: root
     group: root
     mode: 0640
