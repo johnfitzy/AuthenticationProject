@@ -34,20 +34,20 @@
     dest: /etc/profile.d/prompt.sh
     mode: 0755
 
-- name: install vim
-  package:
-    name: vim
-    state: present
+#- name: install vim
+#  package:
+#    name: vim
+#    state: present
 
 - name: Instal unzip
   package:
     name: unzip
     state: present
 
-#- name: Update
-#  yum:
-#    name: '*'
-#    state: latest
+- name: Update
+  yum:
+    name: '*'
+    state: latest
 
 - name: Install JDK
   package:
@@ -56,3 +56,8 @@
   with_items:
     - java-1.8.0-openjdk-headless
     - java-1.8.0-openjdk-devel
+
+#- name: TEST
+#  debug:
+#    msg: Fuck you
+#  when: some_var == "fucked"
