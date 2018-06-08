@@ -1,0 +1,14 @@
+---
+
+- name: Create Wildfly instance directory structure
+  file:
+    path: "{{ item }}"
+    state: directory
+    owner: '{{ wildfly_user }}'
+    group: '{{ wildfly_group }}'
+  with_items:
+    - /opt/wildfly-rs
+    - /opt/wildfly-rs/bin
+    - /opt/wildfly-rs/configuration
+    - /opt/wildfly-rs/deployments
+

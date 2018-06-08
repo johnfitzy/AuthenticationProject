@@ -9,8 +9,6 @@
     dest: '{{ wildfly_dir }}/standalone/configuration/standalone.xml'
     mode: 0644
 
-
-# Make wildfly a service
 - name: Create wildfly etc directory
   file:
     path: '{{ wildfly_conf_dir }}'
